@@ -30,7 +30,7 @@ const route = createBrowserRouter([
 
   { path: '*', element: <h1>404 Not Found</h1> },
   { path: '/login', element: <Login /> },
-  { path: '/signup', element: <Signup /> },
+  { path: '/signup', element: <Signup /> }
 ])
 export default function App() {
   return <RouterProvider router={route} />
