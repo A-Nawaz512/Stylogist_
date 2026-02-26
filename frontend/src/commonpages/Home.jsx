@@ -1,9 +1,12 @@
 import React from 'react'
+import HomeHeader from '../components/home/HomeHeader'
+import FeaturedProducts from '../components/home/FeaturedProducts'
 
 export default function Home() {
   return (
     <div>
-      <h1>Welcome to Stylogist!</h1>
+     <HomeHeader/>
+     <FeaturedProducts/>
     </div>
   )
 }
