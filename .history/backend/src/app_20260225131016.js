@@ -9,27 +9,28 @@ const app = express();
 // 1. Global Middleware Composition (Security & Parsers)
 app.use(helmet()); // Sets secure HTTP headers
 app.use(cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:3000',
-    credentials: true
+  origin: process.env.CLIENT_URL || 'http://localhost:3000',
+  credentials: true
 }));
 app.use(express.json({ limit: '10kb' })); // Prevent DOS attacks via massive payloads
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
 // 2. Health Check Route (Crucial for load balancers)
 app.get('/health', (req, res) => {
-    res.status(200).json({ status: 'success', message: 'Stylogist.pk API is running' });
+  res.status(200).json({ status: 'success', message: 'Stylogist.pk API is running' });
 });
 
 // 3. API Routes Mounting
 // app.use('/api/v1', v1Routes);
 
 // 4. Handle Undefined Routes
-app.use((req, res, next) => {
-    const err = new Error(`Can't find ${req.originalUrl} on this server!`);
-    err.status = 404;
-    next(err);
+app.all('*', (req, res, next) => {
+  const err = new Error(`Can't find ${req.originalUrl} on this server!`);
+  err.status = 404;
+  next(err); // Pass to global error handler
 });
+
 // 5. Global Error Handling Middleware
-app.use(globalErrorHandler);
+// app.use(globalErrorHandler);
 
 export default app;
