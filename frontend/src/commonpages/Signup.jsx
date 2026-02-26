@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { FiUser, FiMail, FiPhone, FiLock, FiEye, FiEyeOff, FiArrowRight } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
+import { FaGoogle, FaFacebookF, FaApple } from 'react-icons/fa';
+import ComonButton from './ComonButton';
 
 export default function Signup() {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', password: '' });
@@ -10,25 +13,24 @@ export default function Signup() {
 
   return (
     <div className="h-screen flex items-center justify-center bg-[#F7F3F0] overflow-hidden">
-      <div className="grid grid-cols-1 lg:grid-cols-2 w-full max-w-7xl h-[90vh] bg-white shadow-2xl rounded-[40px] overflow-hidden mx-4">
-        
-        {/* LEFT SIDE: BRAND SHOWCASE (Image & Gradient) */}
-        <div className="hidden lg:flex relative flex-col justify-end p-12 overflow-hidden bg-[#714329]">
-          {/* Background Image with Gradient Overlay */}
-          <div 
+      <div className="grid grid-cols-1 lg:grid-cols-2 w-full max-w-7xl h-[95vh] bg-white shadow-2xl rounded-[40px] overflow-hidden mx-4">
+
+        {/* LEFT SIDE: BRAND SHOWCASE */}
+        <div className="hidden lg:flex relative flex-col justify-end p-12 overflow-hidden">
+          <div
             className="absolute inset-0 z-0 scale-105 hover:scale-100 transition-transform duration-700"
             style={{
-              background: 'url(https://img.freepik.com/premium-vector/woman-shopping-ecommerce-store_670881-8.jpg?ga=GA1.1.2142144714.1772005373&semt=ais_hybrid&w=740&q=80)',
+              background: 'url(https://img.freepik.com/premium-photo/colorful-paper-shopping-bag_1273586-38616.jpg?ga=GA1.1.2142144714.1772005373&semt=ais_hybrid&w=740&q=80)',
               backgroundSize: 'cover',
               backgroundPosition: 'center'
             }}
           />
-          {/* Linear Gradient for Text Readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#714329] via-[#714329]/20 to-transparent z-10" />
+          {/* Gradient Overlay using your primary #007074 shade */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#007074] via-[#007074]/30 to-transparent z-10" />
 
           <div className="relative z-20 space-y-4">
             <div className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center border border-white/30">
+              <div className="w-10 h-10 bg-[#007074] backdrop-blur-md rounded-xl flex items-center justify-center border border-white/30">
                 <span className="text-white text-xl font-bold">S</span>
               </div>
               <span className="text-white text-xl font-light tracking-widest uppercase">tylogist</span>
@@ -42,18 +44,18 @@ export default function Signup() {
           </div>
         </div>
 
-        {/* RIGHT SIDE: SIGNUP FORM (Border-Bottom Inputs) */}
-        <div className="flex flex-col justify-center px-8 lg:px-20 py-8 bg-white">
+        {/* RIGHT SIDE: SIGNUP FORM */}
+        <div className="flex flex-col justify-center px-8 lg:px-20 bg-white">
           <div className="max-w-md w-full mx-auto">
             <header className="mb-8">
-              <h2 className="text-3xl font-bold text-[#714329]">Join Stylogist</h2>
-              <p className="text-[#B08463] text-sm mt-1">Start your personalized style journey.</p>
+              <h2 className="text-4xl mb-3 font-bold text-[#007074]">Join Stylogist.pk</h2>
+              <p className="text-black text-sm mt-1">Start your personalized style journey.</p>
             </header>
 
-            <form className="space-y-8">
+            <form className="space-y-10">
               {/* Full Name */}
               <div className="relative group">
-                <FiUser className={`absolute left-0 bottom-2 transition-colors ${focusedField === 'name' ? 'text-[#714329]' : 'text-[#D0B9A7]'}`} />
+                <FiUser className={`absolute left-0 bottom-2 transition-colors duration-300 ${focusedField === 'name' ? 'text-black' : 'text-black/40'}`} />
                 <input
                   type="text"
                   name="name"
@@ -61,13 +63,13 @@ export default function Signup() {
                   onFocus={() => setFocusedField('name')}
                   onBlur={() => setFocusedField(null)}
                   onChange={handleChange}
-                  className="w-full pb-2 pl-8 bg-transparent border-b-2 border-[#E9DBD1] focus:border-[#714329] outline-none text-[#714329] placeholder-[#D0B9A7] transition-all"
+                  className="w-full pb-2 pl-8 bg-transparent border-b-2 border-black/30 focus:border-black outline-none text-black placeholder-gray-400 transition-all font-medium"
                 />
               </div>
 
               {/* Email */}
               <div className="relative group">
-                <FiMail className={`absolute left-0 bottom-2 transition-colors ${focusedField === 'email' ? 'text-[#714329]' : 'text-[#D0B9A7]'}`} />
+                <FiMail className={`absolute left-0 bottom-2 transition-colors duration-300 ${focusedField === 'email' ? 'text-black' : 'text-black/40'}`} />
                 <input
                   type="email"
                   name="email"
@@ -75,13 +77,13 @@ export default function Signup() {
                   onFocus={() => setFocusedField('email')}
                   onBlur={() => setFocusedField(null)}
                   onChange={handleChange}
-                  className="w-full pb-2 pl-8 bg-transparent border-b-2 border-[#E9DBD1] focus:border-[#714329] outline-none text-[#714329] placeholder-[#D0B9A7] transition-all"
+                  className="w-full pb-2 pl-8 bg-transparent border-b-2 border-black/30 focus:border-black outline-none text-black placeholder-gray-400 transition-all font-medium"
                 />
               </div>
 
               {/* Phone */}
               <div className="relative group">
-                <FiPhone className={`absolute left-0 bottom-2 transition-colors ${focusedField === 'phone' ? 'text-[#714329]' : 'text-[#D0B9A7]'}`} />
+                <FiPhone className={`absolute left-0 bottom-2 transition-colors duration-300 ${focusedField === 'phone' ? 'text-black' : 'text-black/40'}`} />
                 <input
                   type="tel"
                   name="phone"
@@ -89,13 +91,13 @@ export default function Signup() {
                   onFocus={() => setFocusedField('phone')}
                   onBlur={() => setFocusedField(null)}
                   onChange={handleChange}
-                  className="w-full pb-2 pl-8 bg-transparent border-b-2 border-[#E9DBD1] focus:border-[#714329] outline-none text-[#714329] placeholder-[#D0B9A7] transition-all"
+                  className="w-full pb-2 pl-8 bg-transparent border-b-2 border-black/30 focus:border-black outline-none text-black placeholder-gray-400 transition-all font-medium"
                 />
               </div>
 
               {/* Password */}
               <div className="relative group">
-                <FiLock className={`absolute left-0 bottom-2 transition-colors ${focusedField === 'password' ? 'text-[#714329]' : 'text-[#D0B9A7]'}`} />
+                <FiLock className={`absolute left-0 bottom-2 transition-colors duration-300 ${focusedField === 'password' ? 'text-black' : 'text-black/40'}`} />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   name="password"
@@ -103,30 +105,37 @@ export default function Signup() {
                   onFocus={() => setFocusedField('password')}
                   onBlur={() => setFocusedField(null)}
                   onChange={handleChange}
-                  className="w-full pb-2 pl-8 pr-10 bg-transparent border-b-2 border-[#E9DBD1] focus:border-[#714329] outline-none text-[#714329] placeholder-[#D0B9A7] transition-all"
+                  className="w-full pb-2 pl-8 pr-10 bg-transparent border-b-2 border-black/30 focus:border-black outline-none text-black placeholder-gray-400 transition-all font-medium"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-0 bottom-2 text-[#D0B9A7] hover:text-[#714329] transition-colors"
+                  className="absolute right-0 bottom-2 text-black/40 hover:text-black transition-colors"
                 >
                   {showPassword ? <FiEyeOff /> : <FiEye />}
                 </button>
               </div>
 
-              {/* Submit Button with Gradient */}
-              <button 
-                type="submit"
-                className="w-full py-4 mt-4 text-white font-bold rounded-xl shadow-lg transition-all transform hover:-translate-y-1 active:scale-95 bg-gradient-to-r from-[#714329] via-[#B08463] to-[#B9937B] flex items-center justify-center space-x-2"
-              >
-                <span>Create Account</span>
-                <FiArrowRight />
-              </button>
+              <ComonButton btntitle="Create Account" icon={ <FiArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />}/>
             </form>
 
-            <p className="mt-8 text-center text-sm text-[#B5A192]">
-              Already a member? <span className="text-[#714329] font-bold cursor-pointer hover:underline">Sign In</span>
-            </p>
+            <div className="mt-2 text-center text-sm text-[#B5A192]">
+              <Link to='/login' className="group">
+                Already a member? <span className="text-[#007074] font-bold cursor-pointer group-hover:underline">Sign In</span>
+              </Link>
+            </div>
+            {/* REAL IMAGE SOCIAL LOGINS */}
+            <div className="flex justify-center space-x-6 mt-3">
+              <button className="w-12 h-12 flex items-center justify-center bg-white border border-[#E9DBD1] rounded-full shadow-sm hover:shadow-md hover:scale-110 transition-all duration-300">
+                <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="Google" className="w-6 h-6 object-contain" />
+              </button>
+              <button className="w-12 h-12 flex items-center justify-center bg-white border border-[#E9DBD1] rounded-full shadow-sm hover:shadow-md hover:scale-110 transition-all duration-300">
+                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968764.png" alt="Facebook" className="w-6 h-6 object-contain" />
+              </button>
+              <button className="w-12 h-12 flex items-center justify-center bg-white border border-[#E9DBD1] rounded-full shadow-sm hover:shadow-md hover:scale-110 transition-all duration-300">
+                <img src="https://cdn-icons-png.flaticon.com/512/0/747.png" alt="Apple" className="w-6 h-6 object-contain" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
