@@ -94,13 +94,51 @@ export const resetPassword = async (req, res, next) => {
   }
 
   user.password = req.body.password;
-  
+
   // Force invalidation of the token immediately
   user.passwordResetToken = undefined;
   user.passwordResetExpires = undefined;
-  
+
   await user.save(); // This triggers our pre('save') Bcrypt hook perfectly
 
   // 3. Log the user in automatically, send JWT
   createSendToken(user, 200, res);
+};
+
+export const login = async (req, res, next) => {
+  const { email, password } = req.validated.body;
+
+  // 1. Check if email & password exist
+  if (!email || !password) {
+    return next(new ApiError(400, 'Please provide email and password'));
+  }
+
+  // 2. Find user + explicitly select password (since select: false in schema)
+  const user = await User.findOne({ email }).select('+password');
+  if (!user) {
+    return next(new ApiError(401, 'Incorrect email or password'));
+  }
+
+  // 3. Check if password is correct using instance method
+  const isCorrect = await user.correctPassword(password, user.password);
+  if (!isCorrect) {
+    return next(new ApiError(401, 'Incorrect email or password'));
+  }
+
+  // 4. Remove password from output
+  user.password = undefined;
+
+  // 5. Send JWT
+  createSendToken(user, 200, res);
+}
+
+// ========================
+// LOGOUT
+// ========================
+export const logout = (req, res) => {
+  // 1. Overwrite JWT cookie (if using cookie) or instruct client to remove token
+  res.status(200).json({
+    status: 'success',
+    message: 'Logged out successfully'
+  });
 };

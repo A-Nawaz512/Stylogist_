@@ -1,16 +1,19 @@
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
+import cookieParser from 'cookie-parser';
 import { globalErrorHandler } from './middlewares/error.middleware.js';
 import router from './modules/auth/auth.routes.js';
 import userRoutes from "./modules/users/user.routes.js"
 import addressRoutes from "./modules/address/address.routes.js"
+import productsRoutes from "./modules/products/product.routes.js"
 // import v1Routes from './routes/v1/index.js'; // To be created next
 
 const app = express();
 
 // 1. Global Middleware Composition (Security & Parsers)
 app.use(helmet()); // Sets secure HTTP headers
+app.use(cookieParser());
 app.use(cors({
     origin: process.env.CLIENT_URL || 'http://localhost:3000',
     credentials: true
@@ -27,6 +30,7 @@ app.get('/health', (req, res) => {
 app.use('/api/v1/auth', router)
 app.use('/api/v1/users', userRoutes)
 app.use('/api/v1/addresses', addressRoutes)
+app.use('/api/products', productsRoutes)
 
 // 4. Handle Undefined Routes
 app.use((req, res, next) => {
