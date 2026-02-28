@@ -3,6 +3,8 @@ import cors from 'cors';
 import helmet from 'helmet';
 import { globalErrorHandler } from './middlewares/error.middleware.js';
 import router from './modules/auth/auth.routes.js';
+import userRoutes from "./modules/users/user.routes.js"
+import addressRoutes from "./modules/address/address.routes.js"
 // import v1Routes from './routes/v1/index.js'; // To be created next
 
 const app = express();
@@ -23,6 +25,8 @@ app.get('/health', (req, res) => {
 
 // 3. API Routes Mounting
 app.use('/api/v1/auth', router)
+app.use('/api/v1/users', userRoutes)
+app.use('/api/v1/addresses', addressRoutes)
 
 // 4. Handle Undefined Routes
 app.use((req, res, next) => {
