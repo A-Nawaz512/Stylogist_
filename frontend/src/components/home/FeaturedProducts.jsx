@@ -182,10 +182,11 @@ export default function FeaturedProducts() {
                                 {/* Product Info Section */}
                                 <div className="p-6">
                                     <div className="flex justify-between items-start mb-2">
-                                        <p className="text-xs text-[#B08463] font-bold uppercase tracking-widest">
-                                            {product.brand}
+
+                                        <p className="text-[10px] text-[#007074] font-bold uppercase tracking-widest">
+                                            
+                                        <RatingStars  rating={product.rating} />
                                         </p>
-                                        <RatingStars rating={product.rating} />
                                     </div>
 
                                     <h3 className="text-xl font-bold text-[#222222] mb-1 line-clamp-1 group-hover:text-[#007074] transition-colors">

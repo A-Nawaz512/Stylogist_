@@ -5,6 +5,7 @@ import Navbar from './commonpages/Navbar'
 import Footer from './commonpages/Footer'
 import Login from './commonpages/Login'
 import Signup from './commonpages/Signup'
+import About from './commonpages/About'
 
 
 const MainLayout = () => {
@@ -24,6 +25,10 @@ const route = createBrowserRouter([
       {
         path: "/",
         element: <Home />
+      },
+      {
+        path: "/about",
+        element: <About />
       },
     ]
   },

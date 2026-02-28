@@ -12,7 +12,7 @@ export default function Login() {
 
   return (
     <div className="h-screen flex items-center justify-center bg-[#F7F3F0] overflow-hidden">
-      <div className="grid grid-cols-1 lg:grid-cols-2 w-full max-w-7xl h-[95vh] bg-white shadow-2xl rounded-[40px] overflow-hidden mx-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 w-full max-w-7xl h-[95vh] bg-white shadow-2xl rounded-md overflow-hidden mx-4">
 
         {/* LEFT SIDE: BRAND SHOWCASE */}
         <div className="hidden lg:flex relative flex-col justify-end p-12 overflow-hidden">

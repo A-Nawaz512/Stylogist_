@@ -75,7 +75,7 @@ export default function DealsOfDay() {
     const { hrs, mins, secs } = formatTime(timeLeft);
 
     return (
-        <section className="relative bg-[#cfa34217] py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <section className="relative bg-[#cfa34217] py-10 px-4 sm:px-6 lg:px-8 overflow-hidden">
             {/* Subtle Background Glow */}
             <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#007074]/10 rounded-full blur-[120px] pointer-events-none"></div>
             <div className="absolute bottom-0 left-10 w-72 h-72 bg-[#007074]/10 rounded-full blur-[100px] pointer-events-none"></div>
@@ -150,8 +150,8 @@ export default function DealsOfDay() {
                                     <div className="flex justify-between items-center mb-2">
                                         <span className="text-[9px] font-bold tracking-widest uppercase text-[#007074]">{product.category}</span>
                                         <div className="flex items-center gap-1">
-                                            <FiStar className="fill-[#007074] text-[#007074] w-2 h-2" />
-                                            <span className="text-[9px] font-bold text-gray-300">{product.rating}</span>
+                                            <FiStar className="fill-yellow-400 text-yellow-400 w-2 h-3" />
+                                            <span className="text-[9px] font-bold text-[#007074]">{product.rating}</span>
                                         </div>
                                     </div>
 
