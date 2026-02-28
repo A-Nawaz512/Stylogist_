@@ -13,7 +13,7 @@ export default function Signup() {
 
   return (
     <div className="h-screen flex items-center justify-center bg-[#F7F3F0] overflow-hidden">
-      <div className="grid grid-cols-1 lg:grid-cols-2 w-full max-w-7xl h-[95vh] bg-white shadow-2xl rounded-[40px] overflow-hidden mx-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 w-full max-w-7xl h-[95vh] bg-white shadow-2xl rounded-md overflow-hidden mx-4">
 
         {/* LEFT SIDE: BRAND SHOWCASE */}
         <div className="hidden lg:flex relative flex-col justify-end p-12 overflow-hidden">
@@ -48,7 +48,7 @@ export default function Signup() {
         <div className="flex flex-col justify-center px-8 lg:px-20 bg-white">
           <div className="max-w-md w-full mx-auto">
             <header className="mb-8">
-              <h2 className="text-4xl mb-3 font-bold text-[#007074]">Join Stylogist.pk</h2>
+              <h2 className="text-2xl sm:text-4xl mb-1 sm:mb-3 font-bold text-[#007074]">Join Stylogist.pk</h2>
               <p className="text-black text-sm mt-1">Start your personalized style journey.</p>
             </header>
 

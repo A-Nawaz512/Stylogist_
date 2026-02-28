@@ -4,8 +4,10 @@ import FeaturedProducts from '../components/home/FeaturedProducts'
 import TrendingProducts from '../components/home/TrendingProducts'
 import NewArrivals from '../components/home/NewArrivals'
 import DealsOfDay from '../components/home/DealsOfDay'
+import CategoryHighlights from '../components/home/CategoryHighlights'
+import AiSuggestedProducts from '../components/home/AiSuggestedProducts'
 
-export default function Home() {
+export default function Home() {  
   return (
     <div>
       <HomeHeader />
@@ -13,6 +15,8 @@ export default function Home() {
       <NewArrivals />
       <DealsOfDay/>
       <TrendingProducts />
+      <CategoryHighlights/>
+      <AiSuggestedProducts/>
     </div>
   )
 }
