@@ -8,33 +8,30 @@ import { ApiError } from '../utils/ApiError.js';
  * @returns {Function} Express middleware function
  */
 export const validate = (schema) => async (req, res, next) => {
+  console.log('Request Body:', req.body);  // Ensure the body is logged correctly
+
   try {
-    // Composition: We parse the request object based on the provided schema.
-    // This allows the schema to define expectations for body, query, and params simultaneously.
+    // Adjust validation to parse the body from `req.body` directly
     const validatedData = await schema.parseAsync({
-      body: req.body,
+      body: req.body,  // explicitly use the request body here
       query: req.query,
       params: req.params,
     });
 
-    // Reassign the strictly parsed and stripped data back to the request object.
-    // This removes any malicious or unexpected extra fields an attacker might have injected.
+    // Reassign the strictly parsed and stripped data back to the request object
     req.validated = {
       body: validatedData.body,
       query: validatedData.query,
       params: validatedData.params,
     };
 
-    next();
+    next(); // Proceed to next middleware/route handler
   } catch (error) {
     if (error instanceof z.ZodError) {
-      // Map Zod's complex error array into a single, readable string for the client
       const errorMessage = error.issues.map((issue) => `${issue.path.join('.')}: ${issue.message}`).join(', ');
-
-      // Pass the formatted error to our centralized error handler
       return next(new ApiError(400, `Validation Failed - ${errorMessage}`));
     }
 
-    next(error);
+    next(error);  // Pass other errors to the global error handler
   }
 };

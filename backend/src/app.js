@@ -8,6 +8,8 @@ import userRoutes from "./modules/users/user.routes.js"
 import addressRoutes from "./modules/address/address.routes.js"
 import productsRoutes from "./modules/products/product.routes.js"
 import categoryRoutes from "./modules/categories/category.routes.js"
+import orderRoutes from "./modules/orders/order.routes.js"
+import adminRoutes from "./modules/admin/admin.routes.js"
 // import v1Routes from './routes/v1/index.js'; // To be created next
 
 const app = express();
@@ -33,6 +35,8 @@ app.use('/api/v1/users', userRoutes)
 app.use('/api/v1/addresses', addressRoutes)
 app.use('/api/products', productsRoutes)
 app.use('/api/v1/categories', categoryRoutes)
+app.use('/api/v1/orders', orderRoutes)
+app.use("/api/v1/admin", adminRoutes);
 
 // 4. Handle Undefined Routes
 app.use((req, res, next) => {
