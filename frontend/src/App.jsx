@@ -11,6 +11,10 @@ import HotDeals from './commonpages/HotDeals'
 import CategoryPage from './components/category/CategoryPage'
 import ForgotPassword from './commonpages/ForgotPassword'
 import TermsPrivacy from './commonpages/TermsPrivacy'
+import ProductDetailsPage from './commonpages/SingleProductPage'
+import CartPage from './commonpages/CartPage'
+import WishlistPage from './commonpages/WishlistPage'
+import CheckoutPage from './commonpages/checkoutPage'
 import PageNotFound from './commonpages/PageNotFound'
 
 
@@ -58,6 +62,22 @@ const route = createBrowserRouter([
       },
      
 
+      {
+        path: "/single-product",
+        element: <ProductDetailsPage />
+      },
+      {
+        path: "/review-cart",
+        element: <CartPage />
+      },
+      {
+        path: "/check-out",
+        element: <CheckoutPage />
+      },
+      {
+        path: "/saved-for-later",
+        element: <WishlistPage />
+      },
     ]
   },
 
