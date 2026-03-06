@@ -1,350 +1,218 @@
 import React, { useState, useMemo } from 'react';
 import { 
-  FiFilter, 
-  FiChevronRight, 
-  FiChevronDown, 
-  FiStar, 
-  FiX 
+  FiFilter, FiChevronRight, FiChevronDown, FiStar, FiX, FiShoppingCart, FiHeart 
 } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import ComonButton from '../../commonpages/ComonButton';
 
-// --- MOCK DATA ---
+// ==========================================
+// MOCK DATA (Expanded Categories)
+// ==========================================
 const MOCK_PRODUCTS = [
-  { id: 1, name: "Gradient Graphic T-shirt", type: "T-shirts", style: "Casual", price: 145, originalPrice: null, rating: 4.5, sizes: ["Small", "Medium", "Large"], image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1780&auto=format&fit=crop" },
-  { id: 2, name: "Polo with Tipping Details", type: "Shirts", style: "Formal", price: 180, originalPrice: null, rating: 4.5, sizes: ["Medium", "Large", "X-Large"], image: "https://images.unsplash.com/photo-1581655353564-df123a1eb820?q=80&w=1974&auto=format&fit=crop" },
-  { id: 3, name: "Black Striped T-shirt", type: "T-shirts", style: "Casual", price: 120, originalPrice: 150, discount: 20, rating: 5.0, sizes: ["Small", "Medium"], image: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?q=80&w=1964&auto=format&fit=crop" },
-  { id: 4, name: "Skinny Fit Jeans", type: "Jeans", style: "Casual", price: 240, originalPrice: 260, discount: 8, rating: 3.5, sizes: ["Medium", "Large", "X-Large"], image: "https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=1926&auto=format&fit=crop" },
-  { id: 5, name: "Checkered Shirt", type: "Shirts", style: "Casual", price: 180, originalPrice: null, rating: 4.5, sizes: ["Large", "X-Large"], image: "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?q=80&w=1925&auto=format&fit=crop" },
-  { id: 6, name: "Sleeve Striped T-shirt", type: "T-shirts", style: "Casual", price: 130, originalPrice: 160, discount: 19, rating: 4.5, sizes: ["Small", "Medium", "Large"], image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=1974&auto=format&fit=crop" },
-  { id: 7, name: "Vertical Striped Shirt", type: "Shirts", style: "Party", price: 212, originalPrice: 232, discount: 9, rating: 5.0, sizes: ["Medium", "Large"], image: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=1974&auto=format&fit=crop" },
-  { id: 8, name: "Courage Graphic T-shirt", type: "T-shirts", style: "Gym", price: 145, originalPrice: null, rating: 4.0, sizes: ["Small", "Medium", "Large", "X-Large"], image: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=1974&auto=format&fit=crop" },
-  { id: 9, name: "Loose Fit Bermuda Shorts", type: "Shorts", style: "Gym", price: 80, originalPrice: null, rating: 3.0, sizes: ["Medium", "Large"], image: "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?q=80&w=1974&auto=format&fit=crop" },
+  // --- ORIGINAL 6 ---
+  { id: 1, name: "Midnight Silk Wrap Dress", brand: "Stylogist Women", type: "Women", style: "Formal", price: 210, originalPrice: 250, discount: 16, rating: 4.8, image: "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?q=80&w=1974&auto=format&fit=crop" },
+  { id: 2, name: "Classic Oxford Cotton Shirt", brand: "Stylogist Men", type: "Men", style: "Formal", price: 145, originalPrice: null, rating: 4.5, image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=1976&auto=format&fit=crop" },
+  { id: 3, name: "Radiance Vitamin C Serum", brand: "Stylogist Beauty", type: "Beauty", style: "Skincare", price: 85, originalPrice: 110, discount: 22, rating: 5.0, image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=1974&auto=format&fit=crop" },
+  { id: 4, name: "Gold Minimalist Watch", brand: "Accessories", type: "Accessories", style: "Minimalist", price: 320, originalPrice: 350, discount: 8, rating: 4.9, image: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?q=80&w=1998&auto=format&fit=crop" },
+  { id: 5, name: "Slim Fit Chino Trousers", brand: "Stylogist Men", type: "Men", style: "Casual", price: 120, originalPrice: null, rating: 4.4, image: "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?q=80&w=1974&auto=format&fit=crop" },
+  { id: 6, name: "Pure Silk Scarf", brand: "Accessories", type: "Accessories", style: "Luxury", price: 95, originalPrice: 120, discount: 20, rating: 4.7, image: "https://images.unsplash.com/photo-1601924994987-69e26d50dc26?q=80&w=2070&auto=format&fit=crop" },
+
+  // --- WOMEN'S SECTION (6 MORE) ---
+  { id: 7, name: "Cashmere Turtleneck", brand: "Stylogist Women", type: "Women", style: "Casual", price: 195, originalPrice: 225, discount: 13, rating: 4.9, image: "https://images.unsplash.com/photo-1574015974293-817f0efebb1b?q=80&w=1974&auto=format&fit=crop" },
+  { id: 8, name: "High-Waist Tailored Trousers", brand: "Stylogist Women", type: "Women", style: "Formal", price: 140, originalPrice: null, rating: 4.6, image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?q=80&w=1974&auto=format&fit=crop" },
+  { id: 9, name: "Velvet Cocktail Dress", brand: "Stylogist Women", type: "Women", style: "Formal", price: 280, originalPrice: 320, discount: 12, rating: 5.0, image: "https://images.unsplash.com/photo-1518183214770-9cffbbe7258a?q=80&w=1974&auto=format&fit=crop" },
+  { id: 10, name: "Linen Summer Blazer", brand: "Stylogist Women", type: "Women", style: "Casual", price: 165, originalPrice: null, rating: 4.3, image: "https://images.unsplash.com/photo-1548142813-c348350df52b?q=80&w=1978&auto=format&fit=crop" },
+  { id: 11, name: "Pleated Midi Skirt", brand: "Stylogist Women", type: "Women", style: "Casual", price: 88, originalPrice: 110, discount: 20, rating: 4.5, image: "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?q=80&w=1974&auto=format&fit=crop" },
+  { id: 12, name: "Satin Camisole Top", brand: "Stylogist Women", type: "Women", style: "Casual", price: 55, originalPrice: null, rating: 4.7, image: "https://images.unsplash.com/photo-1609357483215-0604b9319e7a?q=80&w=1974&auto=format&fit=crop" },
+
+  // --- MEN'S SECTION (6 MORE) ---
+  { id: 13, name: "Wool Blend Overcoat", brand: "Stylogist Men", type: "Men", style: "Formal", price: 350, originalPrice: 420, discount: 16, rating: 4.9, image: "https://images.unsplash.com/photo-1539571483399-6a56e01a88b5?q=80&w=1974&auto=format&fit=crop" },
+  { id: 14, name: "Raw Denim Jeans", brand: "Stylogist Men", type: "Men", style: "Casual", price: 130, originalPrice: null, rating: 4.8, image: "https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=1926&auto=format&fit=crop" },
+  { id: 15, name: "Italian Leather Loafers", brand: "Stylogist Men", type: "Men", style: "Formal", price: 215, originalPrice: 260, discount: 17, rating: 4.7, image: "https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?q=80&w=1974&auto=format&fit=crop" },
+  { id: 16, name: "Merino Wool Sweater", brand: "Stylogist Men", type: "Men", style: "Casual", price: 110, originalPrice: 135, discount: 18, rating: 4.6, image: "https://images.unsplash.com/photo-1610384029674-d6a053bd1b21?q=80&w=1974&auto=format&fit=crop" },
+  { id: 17, name: "Premium Leather Belt", brand: "Accessories", type: "Men", style: "Casual", price: 65, originalPrice: null, rating: 4.4, image: "https://images.unsplash.com/photo-1624222247344-550fb805cc05?q=80&w=1974&auto=format&fit=crop" },
+  { id: 18, name: "Linen Grandad Shirt", brand: "Stylogist Men", type: "Men", style: "Casual", price: 90, originalPrice: 110, discount: 18, rating: 4.5, image: "https://images.unsplash.com/photo-1589310243389-96a5483213a8?q=80&w=1974&auto=format&fit=crop" },
+
+  // --- BEAUTY & ACCESSORIES (8 MORE) ---
+  { id: 19, name: "Hyaluronic Acid Serum", brand: "Stylogist Beauty", type: "Beauty", style: "Skincare", price: 75, originalPrice: 90, discount: 16, rating: 4.9, image: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?q=80&w=1974&auto=format&fit=crop" },
+  { id: 20, name: "Rose Quartz Face Roller", brand: "Stylogist Beauty", type: "Beauty", style: "Wellness", price: 40, originalPrice: null, rating: 4.3, image: "https://images.unsplash.com/photo-1601049676518-d820512b3200?q=80&w=1974&auto=format&fit=crop" },
+  { id: 21, name: "Sandalwood Beard Oil", brand: "Stylogist Beauty", type: "Beauty", style: "Grooming", price: 35, originalPrice: 45, discount: 22, rating: 4.8, image: "https://images.unsplash.com/photo-1626285861696-9f0bf5a49c6d?q=80&w=1974&auto=format&fit=crop" },
+  { id: 22, name: "Silver Herringbone Chain", brand: "Accessories", type: "Accessories", style: "Minimalist", price: 115, originalPrice: null, rating: 4.7, image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=1974&auto=format&fit=crop" },
+  { id: 23, name: "Classic Tortoise Sunglasses", brand: "Accessories", type: "Accessories", style: "Classic", price: 180, originalPrice: 220, discount: 18, rating: 4.9, image: "https://images.unsplash.com/photo-1511499767350-a159402e5bf1?q=80&w=1974&auto=format&fit=crop" },
+  { id: 24, name: "Canvas Weekend Bag", brand: "Accessories", type: "Accessories", style: "Travel", price: 210, originalPrice: null, rating: 4.6, image: "https://images.unsplash.com/photo-1547949003-9792a18a2601?q=80&w=1974&auto=format&fit=crop" },
+  { id: 25, name: "Matte Clay Pomade", brand: "Stylogist Beauty", type: "Beauty", style: "Grooming", price: 28, originalPrice: 35, discount: 20, rating: 4.5, image: "https://images.unsplash.com/photo-1590156191108-de74e3056477?q=80&w=1974&auto=format&fit=crop" },
+  { id: 26, name: "Gold Hoop Earrings", brand: "Accessories", type: "Accessories", style: "Classic", price: 125, originalPrice: 150, discount: 16, rating: 4.8, image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=1974&auto=format&fit=crop" }
 ];
 
-const CATEGORIES = ['T-shirts', 'Shorts', 'Shirts', 'Hoodie', 'Jeans'];
-const SIZES = ['XX-Small', 'X-Small', 'Small', 'Medium', 'Large', 'X-Large', 'XX-Large', '3X-Large', '4X-Large'];
-const DRESS_STYLES = ['Casual', 'Formal', 'Party', 'Gym'];
+const CATEGORIES = ['Men', 'Women', 'Accessories', 'Beauty'];
+const SIZES = ['XS', 'S', 'M', 'L', 'XL'];
 
 export default function CategoryPage() {
-  // --- STATE MANAGEMENT ---
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [maxPrice, setMaxPrice] = useState(300);
+  const [maxPrice, setMaxPrice] = useState(500);
   const [selectedSizes, setSelectedSizes] = useState([]);
-  const [selectedStyle, setSelectedStyle] = useState('All');
   const [sortBy, setSortBy] = useState('popular');
 
-  // --- FILTER LOGIC ---
   const toggleSize = (size) => {
-    setSelectedSizes(prev => 
-      prev.includes(size) ? prev.filter(s => s !== size) : [...prev, size]
-    );
+    setSelectedSizes(prev => prev.includes(size) ? prev.filter(s => s !== size) : [...prev, size]);
   };
 
   const filteredProducts = useMemo(() => {
-    let result = MOCK_PRODUCTS;
-
-    // Filter by Category (Type)
-    if (selectedCategory !== 'All') {
-      result = result.filter(p => p.type === selectedCategory);
-    }
-    // Filter by Dress Style
-    if (selectedStyle !== 'All') {
-      result = result.filter(p => p.style === selectedStyle);
-    }
-    // Filter by Max Price
+    let result = [...MOCK_PRODUCTS];
+    if (selectedCategory !== 'All') result = result.filter(p => p.type === selectedCategory);
     result = result.filter(p => p.price <= maxPrice);
-    // Filter by Sizes (Must include at least one of the selected sizes)
-    if (selectedSizes.length > 0) {
-      result = result.filter(p => p.sizes.some(size => selectedSizes.includes(size)));
-    }
-
-    // Sort Logic
+    
     switch (sortBy) {
-      case 'price-low':
-        return result.sort((a, b) => a.price - b.price);
-      case 'price-high':
-        return result.sort((a, b) => b.price - a.price);
-      case 'rating':
-        return result.sort((a, b) => b.rating - a.rating);
-      case 'popular':
-      default:
-        // Mock popular sorting (just ID based for now)
-        return result.sort((a, b) => a.id - b.id);
+      case 'price-low': return result.sort((a, b) => a.price - b.price);
+      case 'price-high': return result.sort((a, b) => b.price - a.price);
+      case 'rating': return result.sort((a, b) => b.rating - a.rating);
+      default: return result.sort((a, b) => a.id - b.id);
     }
-  }, [selectedCategory, maxPrice, selectedSizes, selectedStyle, sortBy]);
-
-  // --- RENDER HELPERS ---
-  const renderStars = (rating) => {
-    return (
-      <div className="flex items-center gap-1 text-yellow-400 text-sm">
-        {[...Array(5)].map((_, i) => (
-          <FiStar key={i} fill={i < Math.floor(rating) ? "currentColor" : "none"} className={i < Math.floor(rating) ? "text-yellow-400" : "text-gray-300"} />
-        ))}
-        <span className="text-xs text-gray-500 ml-1">{rating}/5</span>
-      </div>
-    );
-  };
+  }, [selectedCategory, maxPrice, sortBy]);
 
   return (
-    <div className="w-full bg-white font-sans text-[#222222]">
+    <div className="w-full bg-[#FDFDFD] font-sans text-[#222222] min-h-screen">
       
       {/* BREADCRUMBS */}
       <div className="container mx-auto px-4 md:px-8 py-6 max-w-7xl">
-        <div className="flex items-center gap-2 text-sm text-gray-500">
-          <Link to="/" className="hover:text-[#007074]">Home</Link>
-          <FiChevronRight size={14} />
-          <span className="text-[#222222] font-bold">Shop</span>
+        <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-gray-400">
+          <Link to="/" className="hover:text-[#007074] transition-colors">Home</Link>
+          <FiChevronRight size={12} />
+          <span className="text-[#222222] font-black">Collections</span>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 md:px-8 pb-24 max-w-7xl flex flex-col lg:flex-row gap-8">
+      <div className="container mx-auto px-4 md:px-8 pb-24 max-w-7xl flex flex-col lg:flex-row gap-12">
         
         {/* ========================================= */}
-        {/* LEFT SIDEBAR: FILTERS                     */}
+        {/* SIDEBAR FILTERS                           */}
         {/* ========================================= */}
-        {/* Mobile Filter Overlay & Drawer */}
-        <div className={`fixed inset-0 bg-black/50 z-50 lg:hidden transition-opacity duration-300 ${isMobileFilterOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`} onClick={() => setIsMobileFilterOpen(false)}></div>
-        
-        <div className={`fixed lg:static top-0 left-0 h-full lg:h-auto w-[280px] lg:w-[260px] bg-white lg:bg-transparent z-50 lg:z-auto overflow-y-auto lg:overflow-visible p-6 lg:p-0 transition-transform duration-300 transform ${isMobileFilterOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'} shrink-0`}>
-          
-          <div className="border border-gray-200 rounded-2xl p-5 lg:p-6 lg:sticky lg:top-28 bg-white shadow-sm">
+        <aside className="w-full lg:w-[240px] shrink-0">
+          <div className="lg:sticky lg:top-24 space-y-10">
             
-            <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-100">
-              <h2 className="text-xl font-bold font-serif">Filters</h2>
-              <FiFilter size={20} className="text-gray-400" />
-              <button className="lg:hidden text-gray-500 hover:text-red-500" onClick={() => setIsMobileFilterOpen(false)}>
-                <FiX size={24} />
-              </button>
-            </div>
-
-            {/* Categories (Types) */}
-            <div className="mb-6 pb-6 border-b border-gray-100 space-y-3">
-              <button 
-                onClick={() => setSelectedCategory('All')}
-                className={`flex items-center justify-between w-full text-sm hover:text-[#007074] transition-colors ${selectedCategory === 'All' ? 'text-[#007074] font-bold' : 'text-gray-600'}`}
-              >
-                All Products <FiChevronRight size={16} />
-              </button>
-              {CATEGORIES.map(cat => (
-                <button 
-                  key={cat} 
-                  onClick={() => setSelectedCategory(cat)}
-                  className={`flex items-center justify-between w-full text-sm hover:text-[#007074] transition-colors ${selectedCategory === cat ? 'text-[#007074] font-bold' : 'text-gray-600'}`}
-                >
-                  {cat} <FiChevronRight size={16} />
-                </button>
-              ))}
-            </div>
-
-            {/* Price Range Slider */}
-            <div className="mb-6 pb-6 border-b border-gray-100">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-bold">Price</h3>
-                <FiChevronDown size={18} />
-              </div>
-              <div className="px-2">
-                <input 
-                  type="range" 
-                  min="50" 
-                  max="300" 
-                  value={maxPrice} 
-                  onChange={(e) => setMaxPrice(e.target.value)}
-                  className="w-full h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#007074]"
-                />
-                <div className="flex justify-between text-sm font-bold mt-3 text-gray-700">
-                  <span>$50</span>
-                  <span className="text-[#007074]">Up to ${maxPrice}</span>
-                </div>
+            {/* Category Filter */}
+            <div>
+              <h3 className="text-xs font-black uppercase tracking-[0.2em] mb-6 text-gray-400">Category</h3>
+              <div className="flex flex-col gap-4">
+                <button onClick={() => setSelectedCategory('All')} className={`text-sm text-left font-bold transition-all ${selectedCategory === 'All' ? 'text-[#007074] pl-2 border-l-2 border-[#007074]' : 'text-gray-500 hover:text-[#222222]'}`}>All Collections</button>
+                {CATEGORIES.map(cat => (
+                  <button key={cat} onClick={() => setSelectedCategory(cat)} className={`text-sm text-left font-bold transition-all ${selectedCategory === cat ? 'text-[#007074] pl-2 border-l-2 border-[#007074]' : 'text-gray-500 hover:text-[#222222]'}`}>{cat}</button>
+                ))}
               </div>
             </div>
 
-            {/* Size Pills */}
-            <div className="mb-6 pb-6 border-b border-gray-100">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-bold">Size</h3>
-                <FiChevronDown size={18} />
+            {/* Price Filter */}
+            <div>
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="text-xs font-black uppercase tracking-[0.2em] text-gray-400">Price Range</h3>
+                <span className="text-xs font-bold text-[#007074]">${maxPrice}</span>
               </div>
+              <input type="range" min="50" max="500" value={maxPrice} onChange={(e) => setMaxPrice(e.target.value)} className="w-full h-1 bg-gray-100 rounded-lg appearance-none cursor-pointer accent-[#007074]" />
+            </div>
+
+            {/* Size Filter */}
+            <div>
+              <h3 className="text-xs font-black uppercase tracking-[0.2em] mb-6 text-gray-400">Size</h3>
               <div className="flex flex-wrap gap-2">
                 {SIZES.map(size => (
-                  <button
-                    key={size}
-                    onClick={() => toggleSize(size)}
-                    className={`px-4 py-2 rounded-full text-xs font-bold transition-colors border ${
-                      selectedSizes.includes(size) 
-                        ? 'bg-[#222222] text-white border-[#222222]' 
-                        : 'bg-[#F7F3F0] text-gray-600 border-transparent hover:border-[#007074]'
-                    }`}
-                  >
-                    {size}
-                  </button>
+                  <button key={size} onClick={() => toggleSize(size)} className={`w-10 h-10 rounded-xl text-[10px] font-black transition-all border ${selectedSizes.includes(size) ? 'bg-[#222] text-white border-[#222]' : 'bg-white text-gray-400 border-gray-100 hover:border-[#007074]'}`}>{size}</button>
                 ))}
               </div>
             </div>
-
-            {/* Dress Style */}
-            <div className="mb-6">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-bold">Dress Style</h3>
-                <FiChevronDown size={18} />
-              </div>
-              <div className="space-y-3">
-                <button 
-                  onClick={() => setSelectedStyle('All')}
-                  className={`flex items-center justify-between w-full text-sm hover:text-[#007074] transition-colors ${selectedStyle === 'All' ? 'text-[#007074] font-bold' : 'text-gray-600'}`}
-                >
-                  All Styles <FiChevronRight size={16} />
-                </button>
-                {DRESS_STYLES.map(style => (
-                  <button 
-                    key={style}
-                    onClick={() => setSelectedStyle(style)}
-                    className={`flex items-center justify-between w-full text-sm hover:text-[#007074] transition-colors ${selectedStyle === style ? 'text-[#007074] font-bold' : 'text-gray-600'}`}
-                  >
-                    {style} <FiChevronRight size={16} />
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Apply Button (Mobile only logic, but good UX to have) */}
-            <button 
-              onClick={() => setIsMobileFilterOpen(false)}
-              className="w-full bg-[#222222] text-white rounded-full py-3.5 text-sm font-bold hover:bg-[#007074] transition-colors"
-            >
-              Apply Filter
-            </button>
           </div>
-        </div>
+        </aside>
 
         {/* ========================================= */}
-        {/* RIGHT SIDE: PRODUCT GRID                  */}
+        {/* PRODUCT GRID                              */}
         {/* ========================================= */}
-        <div className="flex-1">
-          
-          {/* Header row: Title & Sort */}
-          <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
-            <h1 className="text-3xl md:text-4xl font-bold font-serif">
-              {selectedCategory !== 'All' ? selectedCategory : (selectedStyle !== 'All' ? selectedStyle : 'All Products')}
-            </h1>
+        <main className="flex-1">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+            <div>
+              <h1 className="text-4xl font-serif font-black tracking-tight text-[#222] mb-2">{selectedCategory}</h1>
+              <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Showing {filteredProducts.length} unique pieces</p>
+            </div>
             
-            <div className="flex items-center gap-4 text-sm">
-              <span className="text-gray-500 hidden md:block">
-                Showing {filteredProducts.length} Products
-              </span>
-              
-              <div className="flex items-center gap-2">
-                <span className="text-gray-500">Sort by:</span>
-                <select 
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                  className="font-bold bg-transparent focus:outline-none cursor-pointer text-[#222222]"
-                >
-                  <option value="popular">Most Popular</option>
-                  <option value="price-low">Price: Low to High</option>
-                  <option value="price-high">Price: High to Low</option>
-                  <option value="rating">Top Rated</option>
-                </select>
-              </div>
-
-              {/* Mobile Filter Trigger */}
-              <button 
-                className="lg:hidden ml-auto bg-gray-100 p-2 rounded-full"
-                onClick={() => setIsMobileFilterOpen(true)}
-              >
-                <FiFilter size={20} />
-              </button>
+            <div className="flex items-center gap-4 border-b border-gray-100 pb-2">
+              <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Sort By</span>
+              <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} className="text-xs font-black uppercase tracking-widest bg-transparent outline-none cursor-pointer text-[#007074]">
+                <option value="popular">Popularity</option>
+                <option value="price-low">Price: Low-High</option>
+                <option value="price-high">Price: High-Low</option>
+                <option value="rating">Top Rated</option>
+              </select>
             </div>
           </div>
 
-          {/* Grid */}
-          {filteredProducts.length > 0 ? (
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-8 lg:gap-x-6 lg:gap-y-10">
-              {filteredProducts.map((product) => (
-                <div  key={product.id} className=" shadow-md shadow-gray-400 p-2 rounded-md group cursor-pointer">
-                  {/* Image Container */}
-                  <div className="w-full h-[200px] bg-[#F7F3F0] rounded-md overflow-hidden mb-4 relative">
-                    <img 
-                      src={product.image} 
-                      alt={product.name} 
-                      className="w-full h-full object-cover mix-blend-multiply transition-transform duration-700 group-hover:scale-105"
-                    />
-                    {/* Hover Overlay */}
-                    <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+            {filteredProducts.map((product) => (
+              <div key={product.id} className="group relative flex flex-col animate-fadeIn">
+                
+                {/* Image Container with Hover Actions */}
+                <div className="relative aspect-[3/4] rounded-[2rem] bg-white border border-gray-100 p-3 shadow-[0_10px_30px_rgba(0,0,0,0.03)] transition-all duration-500 group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] group-hover:-translate-y-1 overflow-hidden">
+                  
+                  <div className="w-full h-full bg-[#F7F3F0] rounded-[1.5rem] overflow-hidden relative">
+                    <img src={product.image} alt={product.name} className="w-full h-full object-cover mix-blend-multiply transition-transform duration-700 group-hover:scale-110" />
+                    
+                    {/* Floating Heart */}
+                    <button className="absolute top-4 right-4 w-9 h-9 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 transition-all opacity-0 group-hover:opacity-100 shadow-sm translate-y-2 group-hover:translate-y-0">
+                      <FiHeart size={16} />
+                    </button>
+
+                    {/* Quick Add Button */}
+                    <div className="absolute bottom-4 left-4 right-4 translate-y-12 group-hover:translate-y-0 transition-all duration-500">
+                      <button className="w-full bg-[#222]/95 backdrop-blur-md text-white py-3 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-2 hover:bg-[#007074] shadow-xl">
+                        <FiShoppingCart size={14} /> Quick Add
+                      </button>
+                    </div>
                   </div>
+
+                  {/* Discount Badge */}
+                  {product.discount && (
+                    <div className="absolute top-6 left-6 bg-red-500 text-white text-[9px] font-black px-2 py-1 rounded uppercase tracking-tighter">
+                      -{product.discount}%
+                    </div>
+                  )}
+                </div>
+
+                {/* Product Info Section */}
+                <div className="mt-6 px-2 text-center">
+                  <p className="text-[9px] font-black uppercase tracking-[0.2em] text-gray-400 mb-1">{product.brand}</p>
+                  <Link to={`/product/${product.id}`}>
+                    <h3 className="text-sm font-bold text-[#222] mb-2 hover:text-[#007074] transition-colors">{product.name}</h3>
+                  </Link>
                   
-                  {/* Product Info */}
-                  <h3 className="font-bold text-sm md:text-base text-[#222222] truncate mb-1">
-                    {product.name}
-                  </h3>
-                  
-                  {renderStars(product.rating)}
-                  
-                  <div className="flex items-center gap-3 mt-2">
-                    <span className="text-lg md:text-xl font-bold text-[#222222]">${product.price}</span>
+                  <div className="flex items-center justify-center gap-3">
+                    <span className="text-base font-black text-[#222]">${product.price}</span>
                     {product.originalPrice && (
-                      <span className="text-sm md:text-base text-gray-400 line-through font-bold">${product.originalPrice}</span>
-                    )}
-                    {product.discount && (
-                      <span className="text-[10px] md:text-xs font-bold text-red-500 bg-red-100 px-2 py-0.5 rounded-full">
-                        -{product.discount}%
-                      </span>
+                      <span className="text-xs text-gray-300 line-through font-bold">${product.originalPrice}</span>
                     )}
                   </div>
 
-                  <div className='mt-3 flex gap-2 justify-around'>
-                     <button className="bg-[#007074] cursor-pointer text-white py-2 px-4 rounded-md hover:bg-[#005a5a] transition-colors">
-                       Add to Cart
-                     </button>
-                      <button className="border cursor-pointer border-[#007074] text-[#007074] py-2 px-4 rounded-md hover:bg-[#007074] hover:text-white transition-colors">
-                        View Details
-                      </button> 
+                  {/* Production Star Display */}
+                  <div className="flex justify-center items-center gap-1 mt-3">
+                    {[...Array(5)].map((_, i) => (
+                      <FiStar key={i} className={`w-3 h-3 ${i < Math.floor(product.rating) ? 'text-yellow-400 fill-yellow-400' : 'text-gray-200'}`} />
+                    ))}
+                    <span className="text-[10px] font-black text-gray-300 ml-1">{product.rating}</span>
                   </div>
                 </div>
-              ))}
-            </div>
-          ) : (
-            <div className="w-full py-20 text-center flex flex-col items-center justify-center bg-[#F7F3F0] rounded-2xl">
-              <FiFilter size={48} className="text-gray-300 mb-4" />
-              <h3 className="text-xl font-bold text-[#222222] mb-2">No products found</h3>
-              <p className="text-gray-500 text-sm">Try adjusting your filters to see more results.</p>
-              <button 
-                onClick={() => {
-                  setSelectedCategory('All');
-                  setSelectedStyle('All');
-                  setSelectedSizes([]);
-                  setMaxPrice(300);
-                }}
-                className="mt-6 text-[#007074] font-bold uppercase tracking-widest text-sm border-b-2 border-[#007074]"
-              >
-                Clear All Filters
-              </button>
-            </div>
-          )}
 
-          {/* Pagination (Visual UI Only) */}
-          {filteredProducts.length > 0 && (
-            <div className="flex items-center justify-between border-t border-gray-200 mt-12 pt-6">
-              <button className="flex items-center gap-2 text-sm font-bold text-[#222222] border border-gray-200 rounded-lg px-4 py-2 hover:bg-gray-50 transition-colors">
-                &larr; Previous
-              </button>
-              
-              <div className="hidden md:flex items-center gap-1">
-                <button className="w-8 h-8 rounded-lg bg-gray-100 text-[#222222] font-bold text-sm flex items-center justify-center">1</button>
-                <button className="w-8 h-8 rounded-lg text-gray-500 hover:bg-gray-50 font-bold text-sm flex items-center justify-center transition-colors">2</button>
-                <button className="w-8 h-8 rounded-lg text-gray-500 hover:bg-gray-50 font-bold text-sm flex items-center justify-center transition-colors">3</button>
-                <span className="text-gray-400 px-2">...</span>
-                <button className="w-8 h-8 rounded-lg text-gray-500 hover:bg-gray-50 font-bold text-sm flex items-center justify-center transition-colors">8</button>
               </div>
+            ))}
+          </div>
 
-              <button className="flex items-center gap-2 text-sm font-bold text-[#222222] border border-gray-200 rounded-lg px-4 py-2 hover:bg-gray-50 transition-colors">
-                Next &rarr;
-              </button>
+          {/* Empty State */}
+          {filteredProducts.length === 0 && (
+            <div className="w-full py-32 flex flex-col items-center justify-center text-center">
+              <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mb-6 text-gray-300">
+                <FiFilter size={32} />
+              </div>
+              <h3 className="text-xl font-serif font-black mb-2">No items match your filters</h3>
+              <p className="text-gray-400 text-xs font-bold uppercase tracking-widest">Try adjusting your price range or category</p>
             </div>
           )}
 
-        </div>
+        </main>
       </div>
     </div>
   );
