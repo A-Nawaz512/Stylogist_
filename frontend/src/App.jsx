@@ -67,17 +67,18 @@ const route = createBrowserRouter([
         element: <ProductDetailsPage />
       },
       {
-        path: "/review-cart",
+        path: "/cart",
         element: <CartPage />
       },
       {
-        path: "/check-out",
+        path: "/checkout",
         element: <CheckoutPage />
       },
       {
-        path: "/saved-for-later",
+        path: "/wishlist",
         element: <WishlistPage />
       },
+     
     ]
   },
 
