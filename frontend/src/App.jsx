@@ -9,6 +9,10 @@ import About from './commonpages/About'
 import Contact from './commonpages/Contact'
 import HotDeals from './commonpages/HotDeals'
 import CategoryPage from './components/category/CategoryPage'
+import ProductDetailsPage from './commonpages/SingleProductPage'
+import CartPage from './commonpages/CartPage'
+import WishlistPage from './commonpages/WishlistPage'
+import CheckoutPage from './commonpages/checkoutPage'
 
 
 const MainLayout = () => {
@@ -44,6 +48,22 @@ const route = createBrowserRouter([
       {
         path: "/category",
         element: <CategoryPage />
+      },
+      {
+        path: "/single-product",
+        element: <ProductDetailsPage />
+      },
+      {
+        path: "/review-cart",
+        element: <CartPage />
+      },
+      {
+        path: "/check-out",
+        element: <CheckoutPage />
+      },
+      {
+        path: "/saved-for-later",
+        element: <WishlistPage />
       },
     ]
   },
