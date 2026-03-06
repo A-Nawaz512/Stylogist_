@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FiArrowRight } from 'react-icons/fi';
+import { FiArrowRight, FiZap } from 'react-icons/fi';
 
 export default function HomeHeader() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Slider Data for Stylogist.pk with dual CTAs
   const slides = [
     {
       id: 1,
       image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop',
+      brand: 'New Editorial',
       title: 'Signature Style',
-      subtitle: 'Discover premium fashion curated just for you by our smart AI.',
-      description: 'Elevate your wardrobe with our latest editorial pieces. Meticulously crafted for the modern individual who values both cutting-edge aesthetics and everyday comfort.',
+      description: 'Elevate your wardrobe with our latest pieces. Meticulously crafted for the modern individual who values cutting-edge aesthetics.',
       primaryCta: 'Shop New Arrivals',
       primaryLink: '/category',
       secondaryCta: 'View Lookbook',
@@ -21,9 +20,9 @@ export default function HomeHeader() {
     {
       id: 2,
       image: 'https://images.unsplash.com/photo-1612817288484-6f916006741a?q=80&w=2070&auto=format&fit=crop',
+      brand: 'Wellness Bloom',
       title: 'Pure Radiance',
-      subtitle: 'Glow naturally with our top-rated, dermatologist-approved kits.',
-      description: 'Transform your daily routine into a luxurious ritual. Our organic, cruelty-free formulas are designed to deeply nourish, protect, and revitalize your skin from within.',
+      description: 'Transform your daily routine into a luxurious ritual. Dermatologist-approved formulas designed to nourish and protect.',
       primaryCta: 'Explore Skincare',
       primaryLink: '/category',
       secondaryCta: 'Read Reviews',
@@ -32,9 +31,9 @@ export default function HomeHeader() {
     {
       id: 3,
       image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop',
+      brand: 'Season Finale',
       title: 'Winter Elegance',
-      subtitle: 'Cozy, elegant, and timeless. Enjoy up to 40% off on selected items.',
-      description: 'Wrap yourself in luxury this season. From oversized wool coats to ultra-soft cashmere blends, discover the perfect layers to keep you warm without compromising on style.',
+      description: 'Wrap yourself in luxury. From oversized wool coats to soft cashmere blends, discover the perfect layers for the season.',
       primaryCta: 'Claim Your Deal',
       primaryLink: '/deals',
       secondaryCta: 'Browse Collection',
@@ -42,9 +41,8 @@ export default function HomeHeader() {
     }
   ];
 
-  const slideDuration = 6000; // 6 seconds
+  const slideDuration = 6000;
 
-  // Auto-play functionality
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
@@ -52,114 +50,104 @@ export default function HomeHeader() {
     return () => clearInterval(timer);
   }, [slides.length]);
 
-  const goToSlide = (index) => {
-    setCurrentSlide(index);
-  };
+  const customStyles = `
+    @keyframes shimmer { 100% { transform: translateX(100%); } }
+    @keyframes progress { 0% { width: 0%; } 100% { width: 100%; } }
+    @keyframes textSlideUp { 0% { opacity: 0; transform: translateY(40px); } 100% { opacity: 1; transform: translateY(0); } }
+  `;
 
   return (
-    <div className="relative w-full h-[85vh] lg:h-screen overflow-hidden bg-[#111111]">
+    <div className="relative w-full h-[90vh] lg:h-screen overflow-hidden bg-[#111111]">
+      <style>{customStyles}</style>
 
-      {/* Slides Container */}
       {slides.map((slide, index) => {
         const isActive = index === currentSlide;
         return (
-          <div
-            key={slide.id}
-            className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${isActive ? 'opacity-100 z-10' : 'opacity-0 z-0'
-              }`}
-          >
-            {/* Background Image with strong cinematic slow-zoom */}
+          <div key={slide.id} className={`absolute inset-0 w-full h-full transition-all duration-1000 ${isActive ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}>
+            
+            {/* Cinematic Background - Slow Zoom-in Scale */}
             <div
-              className={`absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat transition-transform duration-[7000ms] ease-out ${isActive ? 'scale-110' : 'scale-100'
-                }`}
+              className={`absolute inset-0 w-full h-full bg-cover bg-center transition-transform duration-[7000ms] ease-out ${isActive ? 'scale-110' : 'scale-100'}`}
               style={{ backgroundImage: `url(${slide.image})` }}
             />
 
-            {/* Multi-layered Dark Gradients for perfect text contrast on ANY image */}
-            <div className="absolute inset-0 bg-black/30" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/40" />
+            {/* Premium Dual Layer Gradients */}
+            <div className="absolute inset-0 bg-black/20" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
 
-            {/* Centered Content with Staggered Animations */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 md:px-12 z-20">
-              <div className="max-w-4xl w-full flex flex-col items-center">
+            {/* Content Section - Centered & Premium */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 z-20">
+              <div className="max-w-4xl">
+                
+                {/* Brand Label */}
+                <div className={`inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-[10px] font-black tracking-[0.3em] uppercase mb-6 transition-all duration-1000 delay-300 ${isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                   <FiZap className="text-[#007074] animate-pulse" /> {slide.brand}
+                </div>
 
-                {/* Title (Fades in first) */}
-                <h1
-                  className={`text-4xl md:text-6xl  font-bold text-white mb-4 sm:mb-6 font-serif drop-shadow-2xl tracking-tight transition-all duration-1000 transform ${isActive ? 'translate-y-0 opacity-100 delay-300' : 'translate-y-12 opacity-0'
-                    }`}
-                >
-                  {slide.title}
+                {/* Main Title - Font Serif Black */}
+                <h1 className={`text-5xl md:text-7xl lg:text-8xl font-serif font-black text-white mb-6 tracking-tighter leading-tight drop-shadow-2xl transition-all duration-1000 delay-500 ${isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+                  {slide.title.split(' ')[0]} <span className="italic text-[#007074]">{slide.title.split(' ')[1]}</span>
                 </h1>
 
-            
-                {/* NEW: Description (Fades in third) */}
-                <p className={`text-md sm:text-base md:text-lg text-gray-300 mb-8 sm:font-semibold sm:mb-10 max-w-3xl mx-auto  leading-relaxed drop-shadow-md transition-all duration-1000 transform ${isActive ? 'translate-y-0 opacity-100 delay-[600ms]' : 'translate-y-12 opacity-0'
-                  }`}
-                >
+                {/* Description - Focused & Modern */}
+                <p className={`text-sm md:text-base lg:text-lg text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed uppercase tracking-widest font-medium transition-all duration-1000 delay-700 ${isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
                   {slide.description}
                 </p>
 
-                {/* Dual CTA Buttons (Fades in third) */}
-                <div
-                  className={`flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full sm:w-auto transition-all duration-1000 transform ${isActive ? 'translate-y-0 opacity-100 delay-700' : 'translate-y-12 opacity-0'
-                    }`}
-                >
-                  {/* Primary CTA (Teal) */}
+                {/* Action Buttons */}
+                <div className={`flex flex-col sm:flex-row items-center justify-center gap-5 transition-all duration-1000 delay-[900ms] ${isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+                  
                   <Link
                     to={slide.primaryLink}
-                    className="group relative flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 overflow-hidden rounded-md bg-[#007074] text-white font-bold tracking-widest uppercase text-sm transition-all duration-300 hover:bg-[#005a5d] shadow-[0_0_20px_rgba(0,112,116,0.4)] hover:shadow-[0_0_30px_rgba(0,112,116,0.6)] active:scale-95"
+                    className="group relative flex items-center justify-center gap-3 w-full sm:w-auto px-10 py-4 overflow-hidden rounded-full bg-[#007074] text-white font-black uppercase tracking-[0.2em] text-[11px] transition-all duration-500 hover:shadow-[0_15px_35px_rgba(0,112,116,0.4)] active:scale-95"
                   >
                     <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
                     <span className="relative z-10">{slide.primaryCta}</span>
-                    <FiArrowRight className="relative z-10 group-hover:translate-x-1 transition-transform" />
+                    <FiArrowRight className="relative z-10 group-hover:translate-x-1.5 transition-transform" />
                   </Link>
 
-                  {/* Secondary CTA (Glassmorphism / Outline) */}
                   <Link
                     to={slide.secondaryLink}
-                    className="group flex items-center justify-center w-full sm:w-auto px-8 py-4 rounded-md border border-white/50 bg-white/10 backdrop-blur-md text-white font-bold tracking-widest uppercase text-sm transition-all duration-300 hover:bg-white hover:text-[#222222] active:scale-95"
+                    className="group flex items-center justify-center w-full sm:w-auto px-10 py-4 rounded-full border border-white/30 bg-white/5 backdrop-blur-lg text-white font-black uppercase tracking-[0.2em] text-[11px] transition-all duration-500 hover:bg-white hover:text-[#222] active:scale-95 shadow-xl"
                   >
                     <span>{slide.secondaryCta}</span>
                   </Link>
-                </div>
 
+                </div>
               </div>
             </div>
           </div>
         );
       })}
 
-      {/* Bottom Pagination & Progress Line */}
-      <div className="absolute sm:flex hidden bottom-0 left-0 w-full z-30 pb-8 flex flex-col items-center">
-        {/* Dots */}
-        <div className="flex space-x-3 mb-4">
-          {slides.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              className={`transition-all duration-500 rounded-full ${index === currentSlide
-                  ? 'w-12 h-1.5 bg-[#007074]' // Active dot is wider
-                  : 'w-2 h-1.5 bg-white/50 hover:bg-white'
-                }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
+      {/* Progress & Pagination Controls */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-6">
+        
+        {/* Visual Progress Dots */}
+        <div className="flex items-center gap-4">
+          {slides.map((_, index) => {
+            const isCurrent = index === currentSlide;
+            return (
+              <button
+                key={index}
+                onClick={() => setCurrentSlide(index)}
+                className="group relative w-12 h-8 flex items-center justify-center"
+              >
+                <div className={`h-[2px] transition-all duration-500 rounded-full ${isCurrent ? 'w-full bg-[#007074]' : 'w-4 bg-white/30 group-hover:bg-white/60'}`} />
+                {isCurrent && (
+                   <div className="absolute top-0 left-0 h-full w-full animate-[progress_6s_linear_forwards] bg-transparent border-b-2 border-[#007074]" />
+                )}
+              </button>
+            );
+          })}
         </div>
 
-     
+        {/* Counter */}
+        <div className="text-[10px] font-black text-white tracking-[0.4em] uppercase opacity-40">
+          0{currentSlide + 1} <span className="mx-2">/</span> 0{slides.length}
+        </div>
       </div>
-
-      {/* Tailwind Custom Keyframes */}
-      <style jsx="true">{`
-        @keyframes shimmer {
-          100% { transform: translateX(100%); }
-        }
-        @keyframes progress {
-          0% { width: 0%; }
-          100% { width: 100%; }
-        }
-      `}</style>
     </div>
   );
 }

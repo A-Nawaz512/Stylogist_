@@ -1,209 +1,187 @@
 import React, { useState } from 'react';
-import { FiCpu, FiPlus, FiArrowRight, FiCheckCircle } from 'react-icons/fi';
+import { FiCpu, FiPlus, FiArrowRight, FiCheckCircle, FiShield, FiZap } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
 export default function AiSuggestedProducts() {
   const [hoveredProduct, setHoveredProduct] = useState(null);
 
-  // A complete 'Look' curated by AI
+  // A complete curated 'Regime' or 'Look'
   const curatedLook = {
     mainPiece: {
       id: 401,
       name: "Midnight Silk Slip Dress",
+      brand: "Stylogist Couture",
       price: 14500,
       match: 98,
-      reason: "Matches your affinity for dark, fluid silhouettes.",
+      reason: "Matches your affinity for fluid silhouettes.",
       image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?q=80&w=1983&auto=format&fit=crop",
     },
     accessories: [
       {
         id: 402,
         name: "Matte Onyx Timepiece",
+        brand: "Nordic Time",
         price: 12999,
         match: 94,
-        reason: "Adds the minimalist contrast you prefer.",
         image: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?q=80&w=1976&auto=format&fit=crop",
       },
       {
         id: 403,
-        name: "Quilted Leather Clutch",
-        price: 8500,
+        name: "Radiance Vitamin C Serum",
+        brand: "Glow Botanica",
+        price: 3200,
         match: 91,
-        reason: "Perfect texture pairing for smooth silk.",
-        image: "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?q=80&w=1915&auto=format&fit=crop",
+        image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=1974&auto=format&fit=crop",
       }
     ]
   };
 
   return (
-    <section className="w-full bg-white py-10">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+    <section className="w-full bg-[#FDFDFD] py-16 md:py-24 overflow-hidden relative">
+      {/* AI Pulse Background Decoration */}
+      <div className="absolute top-0 left-0 w-full h-full bg-[#007074]/5 pointer-events-none" />
+      
+      <div className="container mx-auto px-6 max-w-6xl relative z-10">
         
         {/* Section Header */}
-        <div className="mb-10 flex flex-col md:flex-row items-start md:items-end justify-between">
-          <div>
-            <h2 className="text-xl md:text-3xl font-bold text-[#222222] font-serif leading-tight">
-              AI Style <span className="text-[#007074]">Analysis</span>
-            </h2>
-            <div className="h-1 w-16 bg-[#007074] mt-4 rounded-md"></div>
+        <div className="mb-12 text-center md:text-left">
+          <div className="inline-flex items-center gap-2 py-1 px-3 rounded-full bg-[#007074]/10 text-[#007074] text-[10px] font-black tracking-[0.2em] uppercase mb-4">
+            <FiZap className="animate-pulse" /> Neural Style Pairing
           </div>
+          <h2 className="text-4xl md:text-5xl font-serif font-black text-[#222] tracking-tight">
+            AI Style <span className="italic text-[#007074]">Analysis</span>
+          </h2>
         </div>
 
         {/* Dashboard Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           
-          {/* ========================================= */}
-          {/* LEFT: AI PROFILE CONSOLE (Takes up 4 columns) */}
-          {/* ========================================= */}
-          <div className="lg:col-span-4 bg-[#222222] rounded-md p-6 md:p-8 flex flex-col relative overflow-hidden shadow-xl border border-gray-800">
-            {/* Pulsing Radar Background Effect */}
-            <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#007074]/20 rounded-full blur-[80px] animate-pulse"></div>
+          {/* LEFT: AI PROFILE CONSOLE */}
+          <div className="lg:col-span-4 bg-[#222] rounded-[2.5rem] p-8 md:p-10 flex flex-col relative overflow-hidden shadow-2xl border border-white/10">
+            <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#007074]/30 rounded-full blur-[80px] animate-pulse"></div>
 
             <div className="relative z-10 flex-1">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="relative flex items-center justify-center w-10 h-10">
-                  <span className="absolute inline-flex h-full w-full rounded-md bg-[#007074] opacity-50 animate-ping"></span>
-                  <div className="relative flex items-center justify-center w-10 h-10 bg-[#007074] rounded-md text-white">
-                    <FiCpu size={20} />
+              <div className="flex items-center gap-4 mb-10">
+                <div className="relative w-12 h-12 flex items-center justify-center">
+                  <span className="absolute h-full w-full rounded-2xl bg-[#007074]/30 animate-ping"></span>
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#007074] to-teal-400 rounded-2xl flex items-center justify-center text-white shadow-lg">
+                    <FiCpu size={24} />
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-white font-bold tracking-widest uppercase text-sm">Stylogist Engine</h3>
-                  <p className="text-[#007074] text-xs font-mono">Status: Active</p>
+                  <h3 className="text-white font-black tracking-[0.1em] uppercase text-xs">Stylogist Engine</h3>
+                  <p className="text-[#007074] text-[10px] font-mono font-bold animate-pulse">SYSTEM STATUS: ACTIVE</p>
                 </div>
               </div>
 
-              <div className="space-y-6">
+              <div className="space-y-8">
                 <div>
-                  <p className="text-gray-500 text-[10px] uppercase tracking-widest mb-2">Detected Profile</p>
-                  <p className="text-xl text-white font-serif font-bold">Minimalist Elegance</p>
+                  <p className="text-gray-500 text-[9px] font-black uppercase tracking-[0.2em] mb-2">Detected Persona</p>
+                  <p className="text-2xl text-white font-serif font-black italic">Minimalist Elegance</p>
                 </div>
 
-                {/* Simulated Data Readouts */}
-                <div className="space-y-4">
+                <div className="space-y-6">
+                  {/* Progress Bar 1 */}
                   <div>
-                    <div className="flex justify-between text-xs text-gray-400 mb-1">
-                      <span>Color Palette Match</span>
-                      <span className="text-[#007074] font-mono">92%</span>
+                    <div className="flex justify-between text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2">
+                      <span>Palette Match</span>
+                      <span className="text-[#007074]">92%</span>
                     </div>
-                    <div className="w-full h-1 bg-gray-800 rounded-full">
-                      <div className="h-full bg-[#007074] rounded-full w-[92%]"></div>
+                    <div className="w-full h-[3px] bg-white/5 rounded-full overflow-hidden">
+                      <div className="h-full bg-gradient-to-r from-[#007074] to-teal-400 w-[92%] shadow-[0_0_10px_#007074]"></div>
                     </div>
                   </div>
+                  {/* Progress Bar 2 */}
                   <div>
-                    <div className="flex justify-between text-xs text-gray-400 mb-1">
+                    <div className="flex justify-between text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2">
                       <span>Silhouette Fit</span>
-                      <span className="text-[#007074] font-mono">88%</span>
+                      <span className="text-[#007074]">88%</span>
                     </div>
-                    <div className="w-full h-1 bg-gray-800 rounded-full">
-                      <div className="h-full bg-[#007074] rounded-full w-[88%]"></div>
+                    <div className="w-full h-[3px] bg-white/5 rounded-full overflow-hidden">
+                      <div className="h-full bg-gradient-to-r from-[#007074] to-teal-400 w-[88%] shadow-[0_0_10px_#007074]"></div>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-[#111111] p-4 rounded-md border border-gray-800">
-                  <p className="text-gray-400 text-sm leading-relaxed italic">
-                    "Based on your recent interest in monochromatic tones and structured accessories, we have curated a complete evening look."
+                <div className="bg-white/5 p-5 rounded-2xl border border-white/5 backdrop-blur-md">
+                  <p className="text-gray-400 text-xs leading-relaxed italic font-medium">
+                    "Analyzing your affinity for monochromatic tones and fluid structures. Neural pairing complete for this evening ensemble."
                   </p>
                 </div>
               </div>
             </div>
 
-            <button className="mt-8 w-full flex items-center justify-center gap-2 border border-[#007074] text-[#007074] hover:bg-[#007074] hover:text-white py-3 rounded-md transition-colors text-sm font-bold uppercase tracking-widest z-10">
-              Refine Profile
+            <button className="mt-10 w-full bg-transparent border border-white/10 text-white hover:bg-white hover:text-[#222] py-4 rounded-full transition-all duration-500 text-[10px] font-black uppercase tracking-[0.2em] z-10">
+              Refine Neural Profile
             </button>
           </div>
 
-          {/* ========================================= */}
-          {/* RIGHT: CURATED LOOK BENTO GRID (Takes up 8 cols) */}
-          {/* ========================================= */}
+          {/* RIGHT: BENTO GRID */}
           <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
             
-            {/* Main Anchor Piece (Tall) */}
+            {/* MAIN ANCHOR PIECE */}
             <div 
-              className="relative rounded-md overflow-hidden group h-[400px] md:h-auto md:row-span-2 shadow-lg border border-gray-100"
+              className="relative rounded-[2.5rem] overflow-hidden group h-full md:row-span-2 shadow-xl border border-white p-2 bg-white"
               onMouseEnter={() => setHoveredProduct(curatedLook.mainPiece.id)}
               onMouseLeave={() => setHoveredProduct(null)}
             >
-              <img 
-                src={curatedLook.mainPiece.image} 
-                alt={curatedLook.mainPiece.name}
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-              />
-              {/* Glassmorphism Overlay */}
-              <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/90 via-black/50 to-transparent">
-                <div className="flex items-start justify-between">
-                  <div>
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="bg-[#007074] text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider flex items-center gap-1">
-                        <FiCheckCircle size={10}/> {curatedLook.mainPiece.match}% Match
-                      </span>
-                      <span className="text-gray-300 text-xs font-medium italic hidden sm:block">
-                        {curatedLook.mainPiece.reason}
-                      </span>
-                    </div>
-                    <h3 className="text-white text-2xl font-bold font-serif">{curatedLook.mainPiece.name}</h3>
-                    <p className="text-[#007074] text-lg font-bold mt-1">Rs. {curatedLook.mainPiece.price.toLocaleString()}</p>
+              <div className="w-full h-full rounded-[2rem] overflow-hidden relative">
+                <img 
+                  src={curatedLook.mainPiece.image} 
+                  alt={curatedLook.mainPiece.name}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                
+                <div className="absolute bottom-8 left-8 right-8 text-white">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="bg-[#007074] text-white text-[9px] font-black px-2 py-1 rounded-full uppercase tracking-widest flex items-center gap-1 shadow-lg">
+                      <FiCheckCircle size={10}/> {curatedLook.mainPiece.match}% Neural Match
+                    </span>
                   </div>
-                  <button className="bg-white text-[#222222] p-3 rounded-full hover:bg-[#007074] hover:text-white transition-colors transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 shadow-lg">
-                    <FiPlus size={20} />
+                  <h3 className="text-3xl font-serif font-black leading-tight mb-2">{curatedLook.mainPiece.name}</h3>
+                  <p className="text-[#007074] text-xl font-black mb-6">Rs. {curatedLook.mainPiece.price.toLocaleString()}</p>
+                  
+                  <button className="w-full bg-white text-[#222] py-3.5 rounded-full text-[10px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-2 hover:bg-[#007074] hover:text-white transition-all duration-500 shadow-xl">
+                    <FiPlus size={16}/> Add Anchor Piece
                   </button>
                 </div>
               </div>
             </div>
 
-            {/* Accessory 1 (Top Right) */}
-            <div 
-              className="relative rounded-md overflow-hidden group h-[220px] shadow-sm border border-gray-100"
-              onMouseEnter={() => setHoveredProduct(curatedLook.accessories[0].id)}
-              onMouseLeave={() => setHoveredProduct(null)}
-            >
-              <img 
-                src={curatedLook.accessories[0].image} 
-                alt={curatedLook.accessories[0].name}
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-x-0 -bottom-2 p-4 bg-white/90 backdrop-blur-sm border-t border-white/50 transform translate-y-[4.5rem] group-hover:translate-y-0 transition-transform duration-500 ease-in-out">
-                <div className="flex justify-between items-center mb-2">
-                   <h3 className="text-[#222222] text-sm font-bold truncate pr-2">{curatedLook.accessories[0].name}</h3>
-                   <span className="text-[#007074] text-xs font-bold whitespace-nowrap">{curatedLook.accessories[0].match}% Match</span>
+            {/* ACCESSORIES GRID */}
+            <div className="flex flex-col gap-6">
+              {curatedLook.accessories.map((item, idx) => (
+                <div 
+                  key={item.id}
+                  className="relative rounded-[2rem] overflow-hidden group h-[260px] shadow-lg border border-white p-2 bg-white"
+                >
+                  <div className="w-full h-full rounded-[1.5rem] overflow-hidden relative">
+                    <img 
+                      src={item.image} 
+                      alt={item.name}
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    
+                    <div className="absolute bottom-6 left-6 right-6 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+                      <div className="flex justify-between items-end">
+                        <div>
+                          <p className="text-[#007074] text-[10px] font-black uppercase tracking-widest mb-1">{item.match}% Match</p>
+                          <h4 className="text-white text-sm font-bold truncate">{item.name}</h4>
+                        </div>
+                        <button className="bg-white p-2.5 rounded-full hover:bg-[#007074] hover:text-white transition-all shadow-xl">
+                          <FiPlus size={16} />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <p className="text-[#007074] text-sm font-bold mb-3">Rs. {curatedLook.accessories[0].price.toLocaleString()}</p>
-                <button className="w-full bg-[#222222] text-white py-2 text-xs font-bold uppercase tracking-widest rounded hover:bg-[#007074] transition-colors flex items-center justify-center gap-2">
-                  <FiPlus /> Add to Look
-                </button>
-              </div>
-            </div>
-
-            {/* Accessory 2 (Bottom Right) */}
-            <div 
-              className="relative rounded-md overflow-hidden group h-[220px] shadow-sm border border-gray-100"
-              onMouseEnter={() => setHoveredProduct(curatedLook.accessories[1].id)}
-              onMouseLeave={() => setHoveredProduct(null)}
-            >
-              <img 
-                src='https://img.freepik.com/free-photo/outdoor-fashion-portrait-elegant-young-woman-with-amazing-blonde-long-hairs-pretty-face-smiling-enjoy-sunny-day-posing-near-blue-vintage-car-modern-glamour-boho-outfit-bad-jewelry_291049-1147.jpg?ga=GA1.1.2142144714.1772005373&semt=ais_hybrid&w=740&q=80' 
-                alt={curatedLook.accessories[1].name}
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-x-0 -bottom-2 p-4 bg-white/90 backdrop-blur-sm border-t border-white/50 transform translate-y-[4.5rem] group-hover:translate-y-0 transition-transform duration-500 ease-in-out">
-                <div className="flex justify-between items-center mb-2">
-                   <h3 className="text-[#222222] text-sm font-bold truncate pr-2">{curatedLook.accessories[1].name}</h3>
-                   <span className="text-[#007074] text-xs font-bold whitespace-nowrap">{curatedLook.accessories[1].match}% Match</span>
-                </div>
-                <p className="text-[#007074] text-sm font-bold mb-3">Rs. {curatedLook.accessories[1].price.toLocaleString()}</p>
-                <button className="w-full bg-[#222222] text-white py-2 text-xs font-bold uppercase tracking-widest rounded hover:bg-[#007074] transition-colors flex items-center justify-center gap-2">
-                  <FiPlus /> Add to Look
-                </button>
-              </div>
+              ))}
             </div>
 
           </div>
-
         </div>
-        
-      
-
       </div>
     </section>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiLinkedin, FiTwitter, FiInstagram } from 'react-icons/fi';
+import { FiLinkedin, FiTwitter, FiInstagram, FiZap } from 'react-icons/fi';
 
 export default function OurTeam() {
   const teamMembers = [
@@ -12,80 +12,100 @@ export default function OurTeam() {
     {
       id: 2,
       name: "Ali Hassan",
-      role: "Lead AI Engineer",
+      role: "Lead AI Systems Engineer",
       image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop",
     },
     {
       id: 3,
       name: "Sara Khan",
-      role: "Head of Curation",
+      role: "Head of Editorial Curation",
       image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1961&auto=format&fit=crop",
     },
     {
       id: 4,
       name: "Omer Tariq",
-      role: "Director of E-Commerce",
+      role: "Director of Digital Commerce",
       image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1974&auto=format&fit=crop",
     }
   ];
 
   return (
-    <section className="w-full bg-[#F7F3F0] py-10">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+    <section className="w-full bg-[#FDFDFD] py-20 lg:py-12 relative overflow-hidden font-sans border-t border-gray-100">
+      
+      {/* Background Accent */}
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-[#007074]/5 blur-[120px] pointer-events-none" />
+
+      <div className="container mx-auto px-6 relative z-10 max-w-6xl">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 lg:mb-16">
-          <div className="relative">
-            <div className="inline-flex items-center gap-2 mb-3">
-              <span className="w-8 h-0.5 bg-[#007074]"></span>
-              <span className="text-[#007074] text-xs font-bold tracking-widest uppercase">
-                The Minds Behind the Magic
-              </span>
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+          <div className="text-center md:text-left">
+            <div className="inline-block bg-[#007074]/10 text-[#007074] text-[10px] font-black px-3 py-1 rounded-full mb-4 uppercase tracking-[0.2em]">
+               Neural Minds
             </div>
-            <h2 className="text-3xl md:text-5xl font-bold text-[#222222] font-serif leading-tight">
-              Meet The <span className="text-[#007074]">Visionaries</span>
+            <h2 className="text-4xl md:text-5xl font-serif font-black text-[#222] tracking-tight">
+              Meet The <span className="italic text-[#007074]">Visionaries</span>
             </h2>
+            <p className="text-gray-400 mt-6 max-w-md text-sm leading-relaxed uppercase tracking-widest font-medium">
+              The collective of fashion architects and AI specialists defining the future of luxury.
+            </p>
           </div>
-          <p className="text-gray-500 mt-4 md:mt-0 text-sm md:text-base max-w-md md:text-right">
-            A diverse team of fashion experts, AI developers, and industry veterans dedicated to elevating your style.
-          </p>
+          
+          <div className="hidden md:flex flex-col items-end opacity-20">
+             <div className="w-20 h-[1px] bg-[#222] mb-2" />
+             <span className="text-[10px] font-black uppercase tracking-[0.4em]">Est. 2024</span>
+          </div>
         </div>
 
-        {/* Team Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {teamMembers.map((member) => (
-            <div key={member.id} className="group relative">
+        {/* Team Grid - Boutique Style */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+          {teamMembers.map((member, index) => (
+            <div 
+              key={member.id} 
+              className="group flex flex-col relative w-full animate-[slideUp_0.5s_ease-out_forwards]"
+              style={{ animationDelay: `${index * 150}ms` }}
+            >
               
-              {/* Image Container with Hover Effects */}
-              <div className="relative w-full h-[300px]  overflow-hidden rounded-md shadow-md mb-5 bg-[#222222]">
-                <img 
-                  src={member.image} 
-                  alt={member.name} 
-                  className="w-full h-full object-cover grayscale opacity-90 transition-all duration-700 ease-in-out group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105"
-                />
+              {/* Premium Framed Image Container */}
+              <div className="relative aspect-[4/5] rounded-[2.5rem] bg-white border border-gray-100 p-2 shadow-sm transition-all duration-500 group-hover:shadow-2xl group-hover:-translate-y-2 overflow-hidden">
                 
-                {/* Social Links Overlay (Slides up on hover) */}
-                <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-[#222222] to-transparent opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-out flex justify-center space-x-4">
-                  <a href="#" className="w-8 h-8 rounded-full bg-white text-[#222222] flex items-center justify-center hover:bg-[#007074] hover:text-white transition-colors">
-                    <FiLinkedin size={14} />
-                  </a>
-                  <a href="#" className="w-8 h-8 rounded-full bg-white text-[#222222] flex items-center justify-center hover:bg-[#007074] hover:text-white transition-colors">
-                    <FiTwitter size={14} />
-                  </a>
-                  <a href="#" className="w-8 h-8 rounded-full bg-white text-[#222222] flex items-center justify-center hover:bg-[#007074] hover:text-white transition-colors">
-                    <FiInstagram size={14} />
-                  </a>
+                <div className="w-full h-full rounded-[2rem] overflow-hidden bg-[#F7F3F0] relative">
+                  <img 
+                    src={member.image} 
+                    alt={member.name} 
+                    className="w-full h-full object-cover grayscale transition-all duration-1000 ease-out group-hover:grayscale-0 group-hover:scale-105" 
+                  />
+                  
+                  {/* Subtle Gradient Overlays */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  {/* Glassmorphism Social Bar */}
+                  <div className="absolute bottom-4 left-4 right-4 flex justify-center gap-3 p-3 bg-white/20 backdrop-blur-xl rounded-2xl border border-white/30 translate-y-20 group-hover:translate-y-0 transition-transform duration-500">
+                    <a href="#" className="w-8 h-8 rounded-xl bg-white text-[#222] flex items-center justify-center hover:bg-[#007074] hover:text-white transition-all shadow-lg active:scale-90">
+                      <FiLinkedin size={14} />
+                    </a>
+                    <a href="#" className="w-8 h-8 rounded-xl bg-white text-[#222] flex items-center justify-center hover:bg-[#007074] hover:text-white transition-all shadow-lg active:scale-90">
+                      <FiInstagram size={14} />
+                    </a>
+                    <a href="#" className="w-8 h-8 rounded-xl bg-white text-[#222] flex items-center justify-center hover:bg-[#007074] hover:text-white transition-all shadow-lg active:scale-90">
+                      <FiTwitter size={14} />
+                    </a>
+                  </div>
                 </div>
               </div>
 
-              {/* Text Info */}
-              <div className="text-center">
-                <h3 className="text-xl font-bold text-[#222222] mb-1 group-hover:text-[#007074] transition-colors">
+              {/* Minimalist Info Section */}
+              <div className="mt-6 text-center px-2">
+                <h3 className="text-lg font-serif font-black text-[#222] group-hover:text-[#007074] transition-colors tracking-tight">
                   {member.name}
                 </h3>
-                <p className="text-sm font-bold text-gray-400 uppercase tracking-widest">
-                  {member.role}
-                </p>
+                <div className="flex items-center justify-center gap-2 mt-1">
+                  <div className="w-1.5 h-[1px] bg-[#007074]" />
+                  <p className="text-[9px] font-black text-gray-400 uppercase tracking-[0.25em]">
+                    {member.role}
+                  </p>
+                  <div className="w-1.5 h-[1px] bg-[#007074]" />
+                </div>
               </div>
 
             </div>
@@ -93,6 +113,14 @@ export default function OurTeam() {
         </div>
 
       </div>
+
+      {/* Embedded Global Stylogist Animation Keyframes */}
+      <style jsx="true">{`
+        @keyframes slideUp {
+          from { opacity: 0; transform: translateY(40px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
     </section>
   );
 }

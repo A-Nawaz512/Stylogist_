@@ -1,47 +1,71 @@
 import React from 'react';
-import { FiMail } from 'react-icons/fi';
+import { FiMail, FiZap, FiArrowRight } from 'react-icons/fi';
 
 export default function NewsletterBanner() {
-  return (
-    <section className="w-full px-4 sm:px-6 lg:px-8 py-10 bg-white font-sans">
-      <div className="max-w-7xl mx-auto bg-[#222222] rounded-md p-8 md:p-12 lg:p-16 flex flex-col md:flex-row items-center justify-between gap-10 relative overflow-hidden shadow-2xl">
-        
-        {/* ========================================= */}
-        {/* BACKGROUND DECORATIONS                    */}
-        {/* ========================================= */}
-        {/* Subtle Teal glowing orb in the background to make the black card less flat */}
-        <div className="absolute top-0 right-0 w-72 h-72 bg-[#007074] opacity-20 blur-[100px] rounded-full pointer-events-none"></div>
-        <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-[#007074] opacity-10 blur-[80px] rounded-full pointer-events-none"></div>
+  const customStyles = `
+    @keyframes shimmer { 100% { transform: translateX(100%); } }
+    .animate-shimmer { position: relative; overflow: hidden; }
+    .animate-shimmer::after {
+      content: ""; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      animation: shimmer 2s infinite;
+    }
+  `;
 
-        {/* ========================================= */}
-        {/* LEFT: HUGE TYPOGRAPHY                     */}
-        {/* ========================================= */}
-        <div className="w-full md:w-[55%] relative z-10 text-center md:text-left">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-[1.1] tracking-tighter uppercase">
-            Stay Upto Date About <br className="hidden lg:block" /> Our Latest Offers
+  return (
+    <section className="w-full px-6 py-8 bg-[#FDFDFD] font-sans relative overflow-hidden">
+      <style>{customStyles}</style>
+
+      {/* Decorative Branding Background */}
+      <div className="absolute top-1/2 left-10 -translate-y-1/2 text-[10vw] font-serif font-black text-gray-50 pointer-events-none select-none uppercase tracking-tighter opacity-50">
+        Newsletter
+      </div>
+
+      <div className="max-w-6xl mx-auto bg-[#222] rounded-[3rem] p-10 md:p-16 lg:p-20 flex flex-col lg:flex-row items-center justify-between gap-12 relative overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.3)] border border-white/5">
+        
+        {/* Cinematic Glowing Background Orbs */}
+        <div className="absolute top-[-20%] right-[-10%] w-96 h-96 bg-[#007074] opacity-20 blur-[120px] rounded-full pointer-events-none animate-pulse"></div>
+        <div className="absolute bottom-[-10%] left-[-10%] w-80 h-80 bg-[#007074] opacity-10 blur-[100px] rounded-full pointer-events-none"></div>
+
+        {/* LEFT: EDITORIAL TYPOGRAPHY */}
+        <div className="w-full lg:w-[55%] relative z-10 text-center lg:text-left">
+          <div className="inline-flex items-center gap-2 py-1 px-3 rounded-full bg-white/5 text-[#007074] text-[9px] font-black tracking-[0.3em] uppercase mb-6 border border-white/10">
+            <FiZap className="animate-pulse" /> Insider Access
+          </div>
+          <h2 className="text-4xl md:text-6xl font-serif font-black text-white leading-[0.95] tracking-tighter drop-shadow-2xl">
+            Stay ahead of <br />
+            <span className="italic text-[#007074]">The Curve.</span>
           </h2>
+          <p className="text-gray-400 mt-8 text-sm md:text-base leading-relaxed uppercase tracking-widest font-medium max-w-md mx-auto lg:mx-0">
+            Join the Stylogist collective for early access to neural drops and exclusive editorial offers.
+          </p>
         </div>
 
-        {/* ========================================= */}
-        {/* RIGHT: FORM INPUTS                        */}
-        {/* ========================================= */}
-        <div className="w-full md:w-[45%] lg:w-[40%] flex flex-col gap-4 relative z-10">
+        {/* RIGHT: PREMIUM INTERACTIVE FORM */}
+        <div className="w-full lg:w-[40%] flex flex-col gap-5 relative z-10">
           
-          {/* Email Input */}
+          {/* Email Input - Glass Style */}
           <div className="relative group">
-            <FiMail className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#007074] transition-colors duration-300" size={22} />
-            <input
-              type="email"
-              placeholder="Enter your email address"
-              className="w-full bg-white text-[#222222] text-sm md:text-base font-medium placeholder-gray-400 py-4 md:py-4 pl-16 pr-6 rounded-full outline-none focus:ring-4 focus:ring-[#007074]/30 border-2 border-transparent focus:border-[#007074] transition-all shadow-inner"
-            />
+            <div className="absolute inset-0 bg-[#007074] rounded-full blur-md opacity-0 group-focus-within:opacity-20 transition-opacity duration-500" />
+            <div className="relative">
+              <FiMail className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-[#007074] transition-colors duration-300" size={20} />
+              <input
+                type="email"
+                placeholder="EMAIL ADDRESS"
+                className="w-full bg-white/5 border border-white/10 text-white text-[11px] font-black tracking-[0.2em] placeholder-gray-500 py-5 pl-16 pr-6 rounded-full outline-none focus:bg-white/10 focus:border-[#007074]/50 transition-all shadow-2xl"
+              />
+            </div>
           </div>
 
-          {/* Subscribe Button */}
-          <button className="w-full bg-white text-[#222222] hover:bg-[#007074] hover:text-white font-bold text-sm md:text-base uppercase tracking-widest py-4 md:py-4 px-6 rounded-full transition-all duration-300 shadow-lg hover:shadow-[#007074]/40 active:scale-[0.98] border-2 border-transparent">
-            Subscribe to Newsletter
+          {/* Subscribe Button - Stylogist Teal Shimmer */}
+          <button className="animate-shimmer group w-full bg-[#007074] text-white font-black text-[11px] uppercase tracking-[0.3em] py-5 px-8 rounded-full transition-all duration-500 shadow-[0_15px_30px_rgba(0,112,116,0.3)] hover:shadow-[0_20px_40px_rgba(0,112,116,0.5)] hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3">
+            Join The Collective
+            <FiArrowRight className="group-hover:translate-x-1.5 transition-transform" size={16} />
           </button>
           
+          <p className="text-[8px] text-gray-500 font-bold uppercase tracking-widest text-center">
+            By subscribing, you agree to our <span className="text-white border-b border-gray-700 cursor-pointer">Privacy Policy</span>
+          </p>
         </div>
 
       </div>

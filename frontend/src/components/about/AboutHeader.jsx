@@ -1,84 +1,94 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FiArrowRight } from 'react-icons/fi';
+import { FiArrowRight, FiZap } from 'react-icons/fi';
 
 export default function AboutHeader() {
+
+  const customStyles = `
+    @keyframes slowZoom {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.1); }
+    }
+    @keyframes revealUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .animate-reveal {
+      opacity: 0;
+      animation: revealUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+  `;
+
   return (
-    <section className="relative w-full  min-h-[500px] flex justify-center items-center overflow-hidden">
-      
-      {/* BACKGROUND IMAGE & BLUR/COLOR OVERLAYS */}
+    <section className="relative w-full min-h-[520px] md:min-h-[600px] lg:min-h-[70vh] flex items-center justify-center overflow-hidden bg-[#111] py-20 md:py-28">
+
+      <style>{customStyles}</style>
+
+      {/* BACKGROUND */}
       <div className="absolute inset-0 z-0">
-        {/* The Image with a light blur */}
-        <img 
-          src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=2070&auto=format&fit=crop" 
-          alt="About Stylogist" 
-          className="w-full h-full object-cover blur-[3px] scale-105"
+        <img
+          src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=2070&auto=format&fit=crop"
+          alt="About Stylogist"
+          className="w-full h-full object-cover animate-[slowZoom_20s_linear_infinite_alternate]"
         />
-        
-        {/* The Teal Color Overlay (Solid on left, transparent on right) */}
-        <div className="absolute inset-0 bg-gradient-to-l from-[#0070746b] via-[#00707468] to-[#007074]/30"></div>
-        
-        {/* Secondary dark overlay just to ensure text contrast */}
-        <div className="absolute inset-0 bg-black/10"></div>
+
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#007074]/40 via-black/20 to-black/80" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/60" />
       </div>
 
-      {/* LEFT SIDE CONTENT */}
-      <div className="container text-center mx-auto px-4 sm:px-6 lg:px-8  relative z-10">
-        <div className="">
-          
-          {/* Breadcrumb / Tag */}
-          <div className="inline-flex items-center space-x-2 mb-6 animate-[fadeInUp_0.8s_ease-out]">
-            <span className="w-8 h-0.5 bg-white/60"></span>
-            <span className="text-white/80 text-xs font-bold tracking-widest uppercase">
-              Our Story
-            </span>
-          </div>
+      {/* CONTENT */}
+      <div className="relative z-10 max-w-4xl mx-auto px-6 sm:px-8 lg:px-10 text-center flex flex-col items-center">
 
-          {/* Main Heading */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white font-serif leading-tight mb-6 animate-[fadeInUp_1s_ease-out]">
-            Redefining Premium <br />
-            {/* <span className="text-white/90 italic font-light">E-Commerce.</span> */}
-          </h1>
+        {/* Tagline */}
+        <div className="animate-reveal [animation-delay:200ms] flex items-center gap-2 py-2 px-5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-[9px] sm:text-[10px] font-black tracking-[0.3em] uppercase mb-6">
+          <FiZap className="text-[#007074] animate-pulse" />
+          The Stylogist Vision
+        </div>
 
-          {/* Description */}
-          <p className="text-base md:text-lg text-white/80 leading-relaxed mb-10 max-w-4xl mx-auto animate-[fadeInUp_1.2s_ease-out]">
-            At Stylogist.pk, we blend cutting-edge AI technology with high-end fashion to curate a shopping experience that is as unique as your personal style. Welcome to the future of retail.
-          </p>
+        {/* Heading */}
+        <h1 className="animate-reveal [animation-delay:400ms] text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-serif font-black text-white leading-[1] tracking-tight mb-6 drop-shadow-2xl">
+          Redefining <br />
+          <span className="italic text-[#007074]">Modern Rituals</span>
+        </h1>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-[fadeInUp_1.4s_ease-out]">
-            <Link 
-              to="/category" 
-              className="w-full sm:w-auto bg-white text-[#007074] px-8 py-3.5 rounded-md font-bold text-sm uppercase tracking-wider hover:bg-gray-100 hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2 group"
-            >
-              <span>Explore Collection</span>
-              <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
-            </Link>
-            
-            <Link 
-              to="/contact" 
-              className="w-full sm:w-auto bg-transparent border border-white/50 text-white px-8 py-3.5 rounded-md font-bold text-sm uppercase tracking-wider hover:bg-white/10 transition-all duration-300 flex items-center justify-center"
-            >
-              Get in Touch
-            </Link>
-          </div>
+        {/* Divider */}
+        <div className="animate-reveal [animation-delay:600ms] w-16 sm:w-20 h-[1px] bg-gradient-to-r from-transparent via-[#007074] to-transparent mb-6" />
+
+        {/* Description */}
+        <p className="animate-reveal [animation-delay:800ms] text-sm sm:text-base md:text-lg text-gray-300 leading-relaxed max-w-2xl font-medium uppercase tracking-widest drop-shadow-md mb-10">
+          At Stylogist.pk, we blend <span className="text-white font-black">Neural Style Intelligence</span> with artisan-grade fashion to curate a shopping experience as unique as your own DNA.
+        </p>
+
+        {/* Buttons */}
+        <div className="animate-reveal [animation-delay:1000ms] flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+
+          <Link
+            to="/category"
+            className="group bg-white text-[#111] px-8 py-3 rounded-full font-black text-[11px] uppercase tracking-[0.2em] hover:bg-[#007074] hover:text-white transition-all duration-500 shadow-xl active:scale-95 flex items-center gap-2"
+          >
+            Explore Collection
+            <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+          </Link>
+
+          <Link
+            to="/contact"
+            className="bg-white/5 backdrop-blur-lg border border-white/20 text-white px-8 py-3 rounded-full font-black text-[11px] uppercase tracking-[0.2em] hover:bg-white hover:text-[#111] transition-all duration-500 shadow-lg"
+          >
+            Partner With Us
+          </Link>
 
         </div>
       </div>
 
-      {/* Tailwind Custom Animation */}
-      <style jsx="true">{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
+      {/* Scroll Indicator */}
+      <div className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex-col items-center gap-2 opacity-40">
+        <div className="w-[1px] h-10 bg-gradient-to-b from-[#007074] to-transparent" />
+        <span className="text-[8px] font-black uppercase tracking-[0.4em] text-white rotate-90 translate-y-6">
+          Scroll
+        </span>
+      </div>
+
     </section>
   );
 }

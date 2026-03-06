@@ -16,6 +16,7 @@ import CartPage from './commonpages/CartPage'
 import WishlistPage from './commonpages/WishlistPage'
 import CheckoutPage from './commonpages/checkoutPage'
 import PageNotFound from './commonpages/PageNotFound'
+import UserProfile from './Dashboard/UserProfile'
 
 
 const MainLayout = () => {
@@ -85,10 +86,8 @@ const route = createBrowserRouter([
   { path: '*', element: <PageNotFound /> },
   { path: '/login', element: <Login /> },
   { path: '/signup', element: <Signup /> },
-  {
-    path: "/forgot-password",
-    element: <ForgotPassword />
-  },
+  {path: "/forgot-password", element: <ForgotPassword />},
+  {path: "/profile", element: <UserProfile />},
 ])
 export default function App() {
   return <RouterProvider router={route} />

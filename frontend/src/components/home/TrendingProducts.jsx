@@ -1,62 +1,47 @@
 import React, { useState } from 'react';
-import { FiHeart, FiEye, FiTrendingUp, FiArrowRight } from 'react-icons/fi';
-import { FaStar, FaStarHalfAlt, FaRegStar, FaShoppingBag } from 'react-icons/fa';
+import { FiHeart, FiTrendingUp, FiArrowRight, FiShoppingCart } from 'react-icons/fi';
+import { FaStar } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import ComonButton from '../../commonpages/ComonButton';
 
 export default function TrendingProducts() {
-  const [hoveredProduct, setHoveredProduct] = useState(null);
   const [wishlist, setWishlist] = useState([]);
 
-  // Sample trending products data (Top 4 for a solid row)
   const trendingProducts = [
     {
       id: 101,
       name: "Silk Satin Slip Dress",
-      brand: "Elegance",
-      shortDesc: "Luxurious pure silk, cowl neck",
+      brand: "Stylogist Couture",
+      price: 11999,
       originalPrice: 15999,
-      salePrice: 11999,
       rating: 4.9,
-      reviews: 512,
-      image: "https://img.freepik.com/free-photo/young-blond-lovely-woman-luxurious-red-dress-with-wide-sleeves-expressive-pose_273443-1758.jpg?ga=GA1.1.2142144714.1772005373&semt=ais_hybrid&w=740&q=80",
-      isTrending: true,
+      image: "https://plus.unsplash.com/premium_photo-1670537994863-5ad53a3214e0?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     {
       id: 102,
       name: "Oversized Wool Coat",
       brand: "Nordic Time",
-      shortDesc: "Heavyweight wool blend, relaxed fit",
+      price: 7999,
       originalPrice: 9499,
-      salePrice: 7999,
       rating: 4.7,
-      reviews: 340,
-      image: "https://img.freepik.com/premium-photo/young-woman-standing-by-sea-against-sky-winter_1644752-20.jpg?ga=GA1.1.2142144714.1772005373&semt=ais_hybrid&w=740&q=80",
-      isTrending: true,
+      image: "https://images.unsplash.com/photo-1670981321083-9b7ab0843f60?q=80&w=765&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     {
       id: 103,
-      name: "Classic Chelsea Boots",
-      brand: "Urban Luxe",
-      shortDesc: "Suede leather, elastic side panels",
-      originalPrice: 8999,
-      salePrice: 5999,
-      rating: 4.6,
-      reviews: 892,
-      image: "https://img.freepik.com/free-photo/handsome-man-with-phone-bouquet-roses_158595-3618.jpg?t=st=1772777640~exp=1772781240~hmac=97d17ad1cbfe40eb1097a4e18197ba44024470aa61bc7f71ea6a38898f53c12d&w=1480",
-      isTrending: true,
+      name: "Radiance Vitamin C Serum",
+      brand: "Glow Botanica",
+      price: 3200,
+      originalPrice: 4500,
+      rating: 5.0,
+      image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=1974&auto=format&fit=crop",
     },
     {
       id: 104,
-      name: "Quilted Crossbody Bag",
-      brand: "Artisan",
-      shortDesc: "Gold-tone hardware, genuine leather",
-      originalPrice: 5499,
-      salePrice: 4299,
+      name: "Gold Minimalist Watch",
+      brand: "Accessories Co.",
+      price: 14299,
+      originalPrice: 18499,
       rating: 4.8,
-      reviews: 621,
-      image: "https://img.freepik.com/free-photo/gorgeous-young-woman-wears-gray-skirt-coat-walking-down-street-early-evening-smiling_197531-6920.jpg?ga=GA1.1.2142144714.1772005373&semt=ais_hybrid&w=740&q=80",
-      isTrending: true,
+      image: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?q=80&w=1998&auto=format&fit=crop",
     }
   ];
 
@@ -66,134 +51,117 @@ export default function TrendingProducts() {
     );
   };
 
-  const RatingStars = ({ rating }) => {
-    const fullStars = Math.floor(rating);
-    const halfStar = rating % 1 >= 0.5;
-    const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+  const ProductCard = ({ product, index }) => (
+    <div 
+      className="group flex flex-col relative w-full animate-[slideUp_0.5s_ease-out_forwards]"
+      style={{ animationDelay: `${index * 150}ms` }}
+    >
+      {/* Framed Image Container */}
+      <div className="relative aspect-[3/4] rounded-[2rem] bg-white border border-gray-100 p-2 shadow-sm transition-all duration-500 group-hover:shadow-xl group-hover:-translate-y-1 overflow-hidden">
+        <div className="w-full h-full bg-[#F7F3F0] rounded-[1.5rem] overflow-hidden relative">
+          <Link to={`/product/${product.id}`} className="block w-full h-full">
+            <img
+              src={product.image}
+              alt={product.name}
+              className="w-full h-full object-cover mix-blend-multiply transition-transform duration-700 group-hover:scale-110"
+            />
+          </Link>
 
-    return (
-      <div className="flex items-center space-x-0.5">
-        {[...Array(fullStars)].map((_, i) => <FaStar key={`full-${i}`} className="text-yellow-400 w-3 h-3" />)}
-        {halfStar && <FaStarHalfAlt className="text-yellow-400 w-3 h-3" />}
-        {[...Array(emptyStars)].map((_, i) => <FaRegStar key={`empty-${i}`} className="text-[#007074] w-3 h-3" />)}
-      </div>
-    );
-  };
-
-  return (
-    <section className="w-full bg-[#F7F3F0] py-10">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
-          <div className="relative">
-            <div className="flex items-center gap-2 mb-3">
-              <span className=" py-1.5 px-4 rounded-md bg-[#007074]/0 text-[#007074] text-xs font-bold tracking-widest uppercase border border-[#007074]/20 flex items-center gap-2">
-                Most Wanted
-                <FiTrendingUp className="text-[#007074] w-4 h-4" />
-              </span>
-            </div>
-            <h2 className="text-xl md:text-3xl font-bold text-[#222222] font-serif">
-              Trending <span className="text-[#007074]">Right Now</span>
-            </h2>
-            <div className="h-1 w-20 bg-[#007074] mt-4 rounded-md"></div>
+          {/* Trending Badge */}
+          <div className="absolute top-3 left-3 z-10 bg-gradient-to-r from-[#007074] to-teal-400 text-white text-[8px] font-black px-2 py-1 rounded-full uppercase tracking-widest shadow-lg flex items-center gap-1">
+            <FiTrendingUp size={10} /> Trending
           </div>
 
-          {/* View All Button */}
-          <div className="mt-6 md:mt-0">
+          {/* Wishlist Heart */}
+          <button
+            onClick={() => toggleWishlist(product.id)}
+            className="absolute top-3 right-3 z-20 p-2 rounded-full bg-white/90 backdrop-blur-md shadow-sm transition-all hover:scale-110"
+          >
+            <FiHeart
+              size={16}
+              className={wishlist.includes(product.id) ? 'fill-red-500 text-red-500' : 'text-gray-400'}
+            />
+          </button>
+
+          {/* Quick Add Button - Slide Up Animation */}
+          <div className="absolute bottom-3 left-3 right-3 translate-y-12 group-hover:translate-y-0 transition-all duration-500 z-20">
+            <button className="w-full bg-[#222]/95 backdrop-blur-md text-white py-2.5 rounded-xl text-[10px] font-black uppercase tracking-[0.1em] flex items-center justify-center gap-2 hover:bg-[#007074] shadow-xl transition-colors">
+              <FiShoppingCart size={14} /> Quick Add
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Product Information Section */}
+      <div className="mt-5 px-1 text-center">
+        <span className="text-[9px] font-black uppercase tracking-[0.2em] text-[#007074] mb-1 block bg-teal-50 w-fit mx-auto px-2 py-0.5 rounded">
+          {product.brand}
+        </span>
+        <Link to={`/product/${product.id}`}>
+          <h3 className="text-[14px] font-bold text-[#222] hover:text-[#007074] transition-colors leading-tight line-clamp-1 mb-2">
+            {product.name}
+          </h3>
+        </Link>
+        <div className="flex items-center justify-center gap-3">
+          <span className="text-[15px] font-black text-[#222]">
+            Rs. {product.price.toLocaleString()}
+          </span>
+          <span className="text-[12px] text-gray-300 line-through font-bold">
+            Rs. {product.originalPrice.toLocaleString()}
+          </span>
+        </div>
+        <div className="flex justify-center items-center gap-0.5 mt-2.5">
+           {[...Array(5)].map((_, i) => (
+             <FaStar key={i} className={`w-2.5 h-2.5 ${i < Math.floor(product.rating) ? 'text-yellow-400' : 'text-gray-100'}`} />
+           ))}
+           <span className="text-[10px] font-black text-gray-300 ml-1.5">{product.rating}</span>
+        </div>
+      </div>
+    </div>
+  );
+
+  return (
+    <section className="w-full bg-[#FDFDFD] py-16 md:py-14 overflow-hidden relative">
+      {/* Soft Background Accent */}
+      <div className="absolute top-0 right-0 w-[40%] h-full bg-[#007074]/5 blur-[120px] pointer-events-none" />
+
+      <div className="container mx-auto px-6 relative z-10 max-w-6xl">
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+          <div className="text-center md:text-left">
+            <div className="inline-flex items-center gap-2 py-1 px-3 rounded-full bg-[#007074]/10 text-[#007074] text-[10px] font-black tracking-[0.2em] uppercase mb-4">
+              <FiTrendingUp className="animate-pulse" /> Most Wanted Now
+            </div>
+            <h2 className="text-4xl md:text-5xl font-serif font-black text-[#222] tracking-tight">
+              Trending <span className="italic text-[#007074]">Right Now</span>
+            </h2>
+            <p className="text-gray-400 mt-5 max-w-lg text-sm leading-relaxed uppercase tracking-wide font-medium">
+              Join the movement with our most-coveted essentials, styled by you.
+            </p>
+          </div>
+
+          <div className="mt-6 md:mt-0 flex justify-center">
             <Link
               to="/category"
-              className="group hidden sm:inline-flex items-center justify-center space-x-2 px-3 py-2 border border-[#007074] text-[#007074] font-semibold rounded-md hover:bg-[#007074] hover:text-white transition-all duration-300"
+              className="inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.3em] text-[#222] hover:text-[#007074] transition-all group pb-1 border-b border-gray-100"
             >
-              <span>Explore Trending</span>
-              <FiArrowRight className="group-hover:translate-x-1.5 transition-transform" />
+              Explore Trending
+              <FiArrowRight className="group-hover:translate-x-2 transition-transform" />
             </Link>
           </div>
         </div>
 
-        {/* Static Grid Layout for High Impact */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {trendingProducts.map((product) => (
-            <div
-              key={product.id}
-              className="group relative bg-white rounded-md overflow-hidden shadow-sm hover:shadow-[0_20px_40px_-15px_rgba(0,112,116,0.2)] transition-all duration-500 border border-[#E9DBD1] flex flex-col"
-              onMouseEnter={() => setHoveredProduct(product.id)}
-              onMouseLeave={() => setHoveredProduct(null)}
-            >
-              {/* Product Image Section - Height exactly 200px */}
-              <div className="relative h-[160px] sm:h-[170px] w-full overflow-hidden bg-gray-50 flex-shrink-0">
-
-                {/* TRENDING BADGE */}
-                {product.isTrending && (
-                  <div className="absolute top-3 left-3 z-20 bg-[#007074] text-white text-[10px] font-bold px-3 py-1.5 rounded-md uppercase tracking-wide shadow-md flex items-center gap-1.5">
-                    <FiTrendingUp size={12} /> Trending
-                  </div>
-                )}
-
-                {/* Wishlist Heart */}
-                <button
-                  onClick={() => toggleWishlist(product.id)}
-                  className="absolute top-3 right-3 z-20 p-2 rounded-md bg-white/90 backdrop-blur-sm shadow-sm transition-transform hover:scale-110"
-                >
-                  <FiHeart
-                    size={16}
-                    className={wishlist.includes(product.id) ? 'fill-[#007074] text-[#007074]' : 'text-gray-600 hover:text-[#007074]'}
-                  />
-                </button>
-
-                {/* Main Image */}
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-
-                {/* Hover Overlay Actions */}
-                <div className="absolute inset-0 bg-[#007074]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4 z-10 backdrop-blur-[1px]">
-
-                </div>
-              </div>
-
-              {/* Product Info Section */}
-              <div className="p-5 flex flex-col flex-1">
-                <div className="flex justify-between items-center mb-2">
-                  <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">
-                    {product.brand}
-                  </p>
-                  <div className="flex items-center gap-1">
-                    <RatingStars rating={product.rating} />
-                    <span className="text-xs text-gray-400 ml-1">({product.reviews})</span>
-                  </div>
-                </div>
-
-                <h3 className=" text-md font-bold text-black mb-4 line-clamp-1 transition-colors">
-                  {product.name}
-                </h3>
-
-                <p className="text-sm text-gray-500 mb-4 line-clamp-1">
-                  {product.shortDesc}
-                </p>
-
-                <div className="mt-auto">
-                  <div className="flex justify-between items-end space-x-3 mb-3">
-                    <span className="text-xl font-semibold text-[#007074]">
-                      Rs. {product.salePrice.toLocaleString()}
-                    </span>
-                    {/* <span className="text-sm text-gray-400 line-through mb-0.5">
-                      Rs. {product.originalPrice.toLocaleString()}
-                    </span> */}
-                  </div>
-
-                  {/* Reusing your custom button */}
-                  <button className=' flex items-center justify-center gap-2 w-full bg-[#007074] border border-[#007074] text-white px-4 hover:transform hover:scale-105 shadow-lg py-2 rounded-md hover:text-white text-sm uppercase font-semibold text-[12px] transition-all duration-300 active:scale-95 cursor-pointer'>
-                    Add to cart
-                  </button>
-                </div>
-              </div>
-            </div>
+        {/* Product Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
+          {trendingProducts.map((product, index) => (
+            <ProductCard key={product.id} product={product} index={index} />
           ))}
         </div>
-
+        
+        {/* Bottom Decorative Line */}
+        <div className="mt-20 w-full flex justify-center">
+            <div className="h-[1px] w-24 bg-gradient-to-r from-transparent via-[#007074]/30 to-transparent" />
+        </div>
       </div>
     </section>
   );
