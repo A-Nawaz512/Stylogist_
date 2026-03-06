@@ -9,6 +9,8 @@ import About from './commonpages/About'
 import Contact from './commonpages/Contact'
 import HotDeals from './commonpages/HotDeals'
 import CategoryPage from './components/category/CategoryPage'
+import ForgotPassword from './commonpages/ForgotPassword'
+import TermsPrivacy from './commonpages/TermsPrivacy'
 import ProductDetailsPage from './commonpages/SingleProductPage'
 import CartPage from './commonpages/CartPage'
 import WishlistPage from './commonpages/WishlistPage'
@@ -39,7 +41,7 @@ const route = createBrowserRouter([
       },
       {
         path: "/contact",
-        element: <Contact  />
+        element: <Contact />
       },
       {
         path: "/deals",
@@ -49,6 +51,16 @@ const route = createBrowserRouter([
         path: "/category",
         element: <CategoryPage />
       },
+      {
+        path: "/terms",
+        element: <TermsPrivacy />
+      },
+      {
+        path: "/privacy",
+        element: <TermsPrivacy />
+      },
+     
+
       {
         path: "/single-product",
         element: <ProductDetailsPage />
@@ -70,7 +82,11 @@ const route = createBrowserRouter([
 
   { path: '*', element: <h1>404 Not Found</h1> },
   { path: '/login', element: <Login /> },
-  { path: '/signup', element: <Signup /> }
+  { path: '/signup', element: <Signup /> },
+  {
+    path: "/forgot-password",
+    element: <ForgotPassword />
+  },
 ])
 export default function App() {
   return <RouterProvider router={route} />
