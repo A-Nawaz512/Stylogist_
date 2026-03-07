@@ -17,6 +17,15 @@ import WishlistPage from './commonpages/WishlistPage'
 import CheckoutPage from './commonpages/checkoutPage'
 import PageNotFound from './commonpages/PageNotFound'
 import UserProfile from './Dashboard/UserProfile'
+import AdminLayout from './AdminDashboard/layout/AdminLayout'
+import AdminDashboard from './AdminDashboard/pages/Dashboard'
+import ProductManage from './AdminDashboard/pages/ProductManage'
+import OrderLogs from './AdminDashboard/pages/OrderLogs'
+import UserControl from './AdminDashboard/pages/UserControl'
+import ReviewManage from './AdminDashboard/pages/ReviewManage'
+import RevenueAnalytics from './AdminDashboard/pages/RevenueAnalytics'
+import CategoryManage from './AdminDashboard/pages/CategoryManage'
+import AdminSettings from './AdminDashboard/pages/AdminSettings'
 
 
 const MainLayout = () => {
@@ -61,7 +70,7 @@ const route = createBrowserRouter([
         path: "/privacy",
         element: <TermsPrivacy />
       },
-     
+
 
       {
         path: "/single-product",
@@ -79,15 +88,34 @@ const route = createBrowserRouter([
         path: "/wishlist",
         element: <WishlistPage />
       },
-     
+
     ]
   },
 
   { path: '*', element: <PageNotFound /> },
   { path: '/login', element: <Login /> },
   { path: '/signup', element: <Signup /> },
-  {path: "/forgot-password", element: <ForgotPassword />},
-  {path: "/profile", element: <UserProfile />},
+  { path: "/forgot-password", element: <ForgotPassword /> },
+  { path: "/profile", element: <UserProfile /> },
+
+  // admin Routes
+
+  {
+    path: "/admin",
+    element: <AdminLayout />,
+    children: [
+      { path: "dashboard", element: <AdminDashboard /> },
+      { path: "analytics", element: <RevenueAnalytics /> },
+      { path: "products", element: <ProductManage /> },
+      { path: "categories", element: <CategoryManage /> },
+      { path: "orders", element: <OrderLogs /> },
+      { path: "users", element: <UserControl /> },
+      { path: "reviews", element: <ReviewManage /> },
+      { path: "settings", element: <AdminSettings /> },
+    ]
+  },
+
+
 ])
 export default function App() {
   return <RouterProvider router={route} />

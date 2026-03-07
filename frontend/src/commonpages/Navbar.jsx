@@ -151,8 +151,8 @@ export default function Navbar() {
                       <Link to="/profile" className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-teal-50 text-gray-600 hover:text-[#007074] transition-all">
                         <FiUser size={16} /> <span className="text-[10px] font-black uppercase tracking-widest">My Identity</span>
                       </Link>
-                      <Link to="/profile?tab=orders" className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-teal-50 text-gray-600 hover:text-[#007074] transition-all">
-                        <FiPackage size={16} /> <span className="text-[10px] font-black uppercase tracking-widest">Order Registry</span>
+                      <Link to="/admin/dashboard" className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-teal-50 text-gray-600 hover:text-[#007074] transition-all">
+                        <FiPackage size={16} /> <span className="text-[10px] font-black uppercase tracking-widest">Admin Panel</span>
                       </Link>
                       <button onClick={handleLogout} className="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-red-50 text-red-400 transition-all mt-2 border-t border-gray-50">
                         <FiLogOut size={16} /> <span className="text-[10px] font-black uppercase tracking-widest">Terminate</span>
