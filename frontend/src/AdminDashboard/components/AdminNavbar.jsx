@@ -45,16 +45,16 @@ export default function AdminNavbar() {
         </div>
 
         {/* Admin Profile Display */}
-        <div className="flex items-center gap-3 pl-2 cursor-pointer group">
+        <div className="flex items-center md:gap-3 pl-2 cursor-pointer group">
            <div className="text-right hidden sm:block">
               <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1">Super Admin</p>
               <p className="text-xs font-bold text-slate-900">{adminName}</p>
            </div>
            <div className="relative">
-              <div className="w-10 h-10 rounded-2xl bg-[#007074] flex items-center justify-center text-white font-black shadow-lg shadow-[#007074]/20 group-hover:scale-105 transition-transform">
+              <div className="md:w-10 h-6 md:h-10 w-6  rounded-2xl bg-[#007074] flex items-center justify-center text-white font-black shadow-lg text-[9px] md:text-sm shadow-[#007074]/20 group-hover:scale-105 transition-transform">
                 {adminName.split(' ').map(n => n[0]).join('')}
               </div>
-              <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 rounded-full border-2 border-white" />
+              <div className="absolute -bottom-0.5 -right-0.5 w-2 md:w-3 h-2 md:h-3 bg-green-500 rounded-full border-2 border-white" />
            </div>
            <FiChevronDown className="text-slate-300 group-hover:text-slate-900 transition-colors" />
         </div>

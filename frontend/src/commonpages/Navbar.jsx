@@ -148,6 +148,12 @@ export default function Navbar() {
                       <p className="text-xs font-bold text-[#222] truncate">{user.email}</p>
                     </div>
                     <div className="p-3">
+                      <Link to="/profile" className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-teal-50 text-gray-600 hover:text-[#007074] transition-all">
+                        <FiUser size={16} /> <span className="text-[10px] font-black uppercase tracking-widest">My Identity</span>
+                      </Link>
+                      <Link to="/admin/overview" className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-teal-50 text-gray-600 hover:text-[#007074] transition-all">
+                        <FiPackage size={16} /> <span className="text-[10px] font-black uppercase tracking-widest">Admin Panel</span>
+                      </Link>
                       {user?.role == "Super Admin" ?
 
                         <Link to="/admin/dashboard" className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-teal-50 text-gray-600 hover:text-[#007074] transition-all">

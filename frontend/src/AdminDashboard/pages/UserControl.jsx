@@ -78,12 +78,12 @@ export default function UserControl() {
       {/* 1. HEADER SECTION */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 animate-cascade" style={{ animationDelay: '0ms' }}>
         <div>
-          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Customer Intelligence</h1>
-          <p className="text-slate-500 text-[11px] font-bold uppercase tracking-wider mt-1">
+          <h1 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">Customer Intelligence</h1>
+          <p className="text-slate-500 text-[10px] md:text-sm font-bold uppercase tracking-wider mt-1">
             Manage User Access & Lifetime Value
           </p>
         </div>
-        <div className="flex bg-white border border-slate-100 rounded-2xl p-1.5 shadow-sm">
+        <div className="flex justify-between bg-white border border-slate-100 rounded-2xl p-1.5 shadow-sm">
            {['Active', 'Blocked'].map((tab) => (
              <button 
                 key={tab}
@@ -222,13 +222,13 @@ export default function UserControl() {
           <div className="relative bg-white w-full max-w-2xl rounded-[2rem] shadow-2xl overflow-hidden animate-modal">
              <div className="p-6 border-b border-slate-100 flex items-start justify-between bg-slate-50/50">
                 <div className="flex items-center gap-4">
-                   <div className="w-14 h-14 rounded-2xl bg-[#007074] flex items-center justify-center text-white font-serif font-black text-xl shadow-lg">
+                   <div className="md:w-14 md:h-14 h-7 w-7 text-[12px] rounded-2xl bg-[#007074] flex items-center justify-center text-white font-serif font-black md:text-xl shadow-lg">
                       {viewUser.name.split(' ').map(n => n[0]).join('')}
                    </div>
                    <div>
                       <h2 className="text-xl font-bold text-slate-900 tracking-tight">{viewUser.name}</h2>
-                      <p className="text-xs font-semibold text-slate-500 mt-1 flex items-center gap-2">
-                        {viewUser.email} <span className="text-slate-300">•</span> {viewUser.phone}
+                      <p className="text-xs font-semibold text-slate-500 mt-1 flex-wrap flex items-center gap-2">
+                        {viewUser.email} <span className="md:text-sm text-slate-300">•</span> {viewUser.phone}
                       </p>
                    </div>
                 </div>
@@ -236,19 +236,19 @@ export default function UserControl() {
                    <FiX size={18} />
                 </button>
              </div>
-             <div className="p-6">
-                <div className="grid grid-cols-3 gap-3 mb-6">
+             <div className="md:p-6 p-2">
+                <div className="grid grid-cols-3 gap-3 md:mb-6 mb-2">
                    <div className="bg-slate-50 rounded-xl p-4 border border-slate-100">
-                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Lifetime Value</p>
-                      <p className="text-lg font-black text-[#007074]">Rs. {viewUser.totalSpend}</p>
+                      <p className="text-[8px] md:text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Lifetime Value</p>
+                      <p className="md:text-lg text-[12px] font-black text-[#007074]">Rs. {viewUser.totalSpend}</p>
                    </div>
                    <div className="bg-slate-50 rounded-xl p-4 border border-slate-100">
-                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Total Orders</p>
-                      <p className="text-lg font-black text-slate-900">{viewUser.totalOrders}</p>
+                      <p className="text-[8px] md:text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Total Orders</p>
+                      <p className="md:text-lg text-[12px] font-black text-slate-900">{viewUser.totalOrders}</p>
                    </div>
                    <div className="bg-slate-50 rounded-xl p-4 border border-slate-100">
-                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Member Since</p>
-                      <p className="text-sm font-bold text-slate-900 mt-1">{viewUser.joined}</p>
+                      <p className="text-[8px] md:text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Member Since</p>
+                      <p className="md:text-sm text-[10px] font-bold text-slate-900 mt-1">{viewUser.joined}</p>
                    </div>
                 </div>
                 <div>
