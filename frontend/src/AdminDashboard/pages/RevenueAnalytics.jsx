@@ -71,17 +71,17 @@ export default function RevenueAnalytics() {
       {/* 1. HEADER & CONTROLS (0ms delay) */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 animate-cascade" style={{ animationDelay: '0ms' }}>
         <div>
-          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Financial Intelligence</h1>
-          <p className="text-slate-500 text-sm font-medium uppercase tracking-[0.2em] text-[10px] mt-1">
+          <h1 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">Financial Intelligence</h1>
+          <p className="text-slate-500  md:text-sm font-medium uppercase tracking-[0.2em] text-[10px] mt-1">
             Comprehensive Store Analytics
           </p>
         </div>
-        <div className="flex items-center gap-2 bg-white p-1.5 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+        <div className="flex items-center justify-around overflow-x-auto gap-2 bg-white p-1.5 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
            {['7D', '30D', '3M', '1Y'].map(tf => (
              <button 
                key={tf}
                onClick={() => setTimeframe(tf)}
-               className={`px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all duration-300 ${
+               className={`px-5 py-2 md:py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all duration-300 ${
                  timeframe === tf 
                  ? 'bg-[#007074] text-white shadow-[0_5px_15px_rgba(0,112,116,0.3)] scale-105' 
                  : 'text-slate-400 hover:text-slate-900 hover:bg-slate-50'
@@ -287,7 +287,7 @@ function MetricCard({ title, value, growth, isUp, icon, inverseColors }) {
         <p className={`text-[10px] font-black uppercase tracking-[0.2em] mb-2 flex items-center gap-2 ${inverseColors ? 'text-slate-400' : 'text-slate-400'}`}>
           {title}
         </p>
-        <h2 className={`text-3xl font-serif font-black tracking-tight mb-4 transition-colors duration-300 ${inverseColors ? 'text-white group-hover:text-teal-300' : 'text-slate-900 group-hover:text-[#007074]'}`}>
+        <h2 className={`text-2xl md:text-3xl font-serif md:font-black tracking-tight mb-4 transition-colors duration-300 ${inverseColors ? 'text-white group-hover:text-teal-300' : 'text-slate-900 group-hover:text-[#007074]'}`}>
           {value}
         </h2>
         
